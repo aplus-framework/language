@@ -52,6 +52,7 @@ test:php7.3:
   artifacts:
     paths:
       - build/coverage/
+      - build/api/
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 pages:
