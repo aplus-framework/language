@@ -162,7 +162,7 @@ class Language
 		if ($style && ! \in_array($style, ['short', 'medium', 'long', 'full'], true)) {
 			throw new Exception('Invalid date style format: ' . $style);
 		}
-		$style = $style ? : 'short';
+		$style = $style ?: 'short';
 		return (string) \MessageFormatter::formatMessage(
 			$locale ?? $this->getCurrentLocale(),
 			"{time, date, {$style}}",
@@ -262,6 +262,11 @@ class Language
 		];
 	}
 
+	protected function getFileLines(string $filename) : array
+	{
+		return require $filename;
+	}
+
 	/**
 	 * Gets a language line text.
 	 *
@@ -284,7 +289,7 @@ class Language
 		}
 		$this->addFindedLocale($locale);
 		foreach ($this->findFilenames($locale, $file) as $filename) {
-			$this->addLines($locale, $file, require $filename);
+			$this->addLines($locale, $file, $this->getFileLines($filename));
 		}
 		return $this->languages[$locale][$file][$line] ?? null;
 	}
@@ -373,8 +378,7 @@ class Language
 		string $line,
 		array $args = [],
 		string $locale = null
-	) : string
-	{
+	) : string {
 		$locale = $locale ?? $this->getCurrentLocale();
 		$text = $this->getLine($locale, $file, $line);
 		if ($text === null) {
@@ -387,9 +391,9 @@ class Language
 				$args
 			);
 			// If formatter fail, use the non-formatted text
-			$text = $new_text ? : $text;
+			$text = $new_text ?: $text;
 		}
-		return $text ? : $file . '.' . $line;
+		return $text ?: $file . '.' . $line;
 	}
 
 	/**
