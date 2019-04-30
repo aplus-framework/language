@@ -450,7 +450,21 @@ class Language
 			$dirs[] = $path . \DIRECTORY_SEPARATOR;
 		}
 		$this->directories = $dirs;
+		$this->reindex();
 		return $this;
+	}
+
+	protected function reindex()
+	{
+		$this->findedLocales = [];
+		foreach ($this->languages as $locale => $files) {
+			foreach ($files as $file => $lines) {
+				foreach ($this->findFilenames($locale, $file) as $filename) {
+					$this->addLines($locale, $file, $this->getFileLines($filename));
+				}
+			}
+			$this->addFindedLocale($locale);
+		}
 	}
 
 	/**
@@ -489,6 +503,7 @@ class Language
 		$locales = \array_unique($locales);
 		\sort($locales);
 		$this->supportedLocales = $locales;
+		$this->reindex();
 		return $this;
 	}
 }

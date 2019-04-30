@@ -94,6 +94,16 @@ class LanguageTest extends TestCase
 		]);
 	}
 
+	public function testSetDirectoryAfterScan()
+	{
+		$this->assertEquals('Bye!', $this->language->render('tests', 'bye'));
+		$this->language->setDirectories([
+			__DIR__ . '/locales-1',
+			__DIR__ . '/locales-2',
+		]);
+		$this->assertEquals('Hasta la vista, baby.', $this->language->render('tests', 'bye'));
+	}
+
 	public function testFallbackLevel()
 	{
 		$this->assertEquals($this->language::FALLBACK_DEFAULT, $this->language->getFallbackLevel());
