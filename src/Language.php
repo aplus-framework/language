@@ -284,9 +284,6 @@ class Language
 		if ( ! \in_array($locale, $this->getSupportedLocales(), true)) {
 			return null;
 		}
-		if ($this->isFindedLocale($locale)) {
-			return $this->languages[$locale][$file][$line] ?? null;
-		}
 		$this->addFindedLocale($locale);
 		foreach ($this->findFilenames($locale, $file) as $filename) {
 			$this->addLines($locale, $file, $this->getFileLines($filename));
