@@ -10,11 +10,11 @@ use PHPUnit\Framework\TestCase;
 class LanguageTest extends TestCase
 {
 	/**
-	 * @var \Framework\Language\Language
+	 * @var Language
 	 */
 	protected $language;
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->language = new Language('en', [
 			__DIR__ . '/locales-1',
