@@ -1,11 +1,11 @@
 {
 	"name": "framework/language",
 	"type": "library",
-	"description": "The Language package",
+	"description": "The Framework Language Library",
 	"keywords": [
 		"language"
 	],
-	"homepage": "https://gitlab.com/the-framework/language",
+	"homepage": "https://the-framework.gitlab.io/libraries/language.html",
 	"license": "proprietary",
 	"authors": [
 		{
@@ -53,9 +53,9 @@
 	},
 	"support": {
 		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/language/issues",
-		"wiki": "https://gitlab.com/the-framework/packages/language",
-		"source": "https://gitlab.com/the-framework/language",
-		"docs": "https://the-framework.gitlab.io/the-framework/packages/language/api"
+		"issues": "https://gitlab.com/the-framework/libraries/language/issues",
+		"wiki": "https://gitlab.com/the-framework/libraries/language/wikis/home",
+		"source": "https://gitlab.com/the-framework/libraries/language",
+		"docs": "https://the-framework.gitlab.io/libraries/language/docs/"
 	}
 }
