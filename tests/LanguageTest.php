@@ -84,6 +84,12 @@ class LanguageTest extends TestCase
 			__DIR__ . '/locales-2/',
 			__DIR__ . '/locales-1/',
 		], $this->language->getDirectories());
+		$this->language->setDirectories([]);
+		$this->assertEquals([], $this->language->getDirectories());
+		$this->language->addDirectory(__DIR__ . '/locales-1');
+		$this->assertEquals([__DIR__ . '/locales-1/'], $this->language->getDirectories());
+		$this->language->addDirectory(__DIR__ . '/locales-1');
+		$this->assertEquals([__DIR__ . '/locales-1/'], $this->language->getDirectories());
 	}
 
 	public function testDirectoryNotFound()

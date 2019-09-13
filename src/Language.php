@@ -446,8 +446,16 @@ class Language
 			}
 			$dirs[] = $path . \DIRECTORY_SEPARATOR;
 		}
-		$this->directories = $dirs;
+		$this->directories = $dirs ? \array_unique($dirs) : [];
 		$this->reindex();
+		return $this;
+	}
+
+	public function addDirectory(string $directory)
+	{
+		$this->setDirectories(\array_merge([
+			$directory,
+		], $this->getDirectories()));
 		return $this;
 	}
 
