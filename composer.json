@@ -6,7 +6,7 @@
 		"language"
 	],
 	"homepage": "https://the-framework.gitlab.io/libraries/language.html",
-	"license": "proprietary",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Natan Felles",
