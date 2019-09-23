@@ -1,6 +1,5 @@
 <?php namespace Tests\Language;
 
-use Framework\Language\Exception;
 use Framework\Language\Language;
 use PHPUnit\Framework\TestCase;
 
@@ -67,7 +66,7 @@ class LanguageTest extends TestCase
 
 	public function testDateWithInvalidStyle()
 	{
-		$this->expectException(Exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->language->date(\time(), 'unknown');
 	}
 
@@ -94,7 +93,7 @@ class LanguageTest extends TestCase
 
 	public function testDirectoryNotFound()
 	{
-		$this->expectException(Exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->language->setDirectories([
 			__DIR__ . '/unknow',
 		]);
@@ -119,7 +118,7 @@ class LanguageTest extends TestCase
 
 	public function testInvalidFallbackLevel()
 	{
-		$this->expectException(Exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->language->setFallbackLevel(999);
 	}
 

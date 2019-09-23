@@ -153,14 +153,14 @@ class Language
 	 * @param string|null $style  One of: short, medium, long or full. Leave null to use short
 	 * @param string|null $locale A custom locale or null to use the current
 	 *
-	 * @throws \Framework\Language\Exception for invalid style format
+	 * @throws \InvalidArgumentException for invalid style format
 	 *
 	 * @return string
 	 */
 	public function date(int $time, string $style = null, string $locale = null) : string
 	{
 		if ($style && ! \in_array($style, ['short', 'medium', 'long', 'full'], true)) {
-			throw new Exception('Invalid date style format: ' . $style);
+			throw new \InvalidArgumentException('Invalid date style format: ' . $style);
 		}
 		$style = $style ?: 'short';
 		return (string) \MessageFormatter::formatMessage(
@@ -432,7 +432,7 @@ class Language
 	 *
 	 * @param array $directories a list of valid directory paths
 	 *
-	 * @throws \Framework\Language\Exception if a directory path is inaccessible
+	 * @throws \InvalidArgumentException if a directory path is inaccessible
 	 *
 	 * @return $this
 	 */
@@ -442,7 +442,7 @@ class Language
 		foreach ($directories as $directory) {
 			$path = \realpath($directory);
 			if ( ! $path || ! \is_dir($path)) {
-				throw new Exception('Directory path inaccessible: ' . $directory);
+				throw new \InvalidArgumentException('Directory path inaccessible: ' . $directory);
 			}
 			$dirs[] = $path . \DIRECTORY_SEPARATOR;
 		}
@@ -486,7 +486,7 @@ class Language
 			static::FALLBACK_PARENT,
 			static::FALLBACK_DEFAULT,
 		], true)) {
-			throw new Exception('Invalid fallback level: ' . $level);
+			throw new \InvalidArgumentException('Invalid fallback level: ' . $level);
 		}
 		$this->fallbackLevel = $level;
 		return $this;
