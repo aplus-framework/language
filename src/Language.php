@@ -51,7 +51,7 @@ class Language
 	 *
 	 * @var int
 	 */
-	protected $fallbackLevel = 2;
+	protected $fallbackLevel = Language::FALLBACK_DEFAULT;
 	/**
 	 * List with locales of already scanned directories.
 	 *
@@ -78,8 +78,8 @@ class Language
 	/**
 	 * Language constructor.
 	 *
-	 * @param string $locale      The default (and current) locale code
-	 * @param array  $directories List of directory paths to find for language files
+	 * @param string         $locale      The default (and current) locale code
+	 * @param array|string[] $directories List of directory paths to find for language files
 	 */
 	public function __construct(string $locale, array $directories = [])
 	{
@@ -176,7 +176,7 @@ class Language
 	 * @param string $locale The required locale
 	 * @param string $file   The required file
 	 *
-	 * @return array a list of valid filenames
+	 * @return array|string[] a list of valid filenames
 	 */
 	protected function findFilenames(string $locale, string $file) : array
 	{
@@ -213,7 +213,7 @@ class Language
 	/**
 	 * Gets the list of directories where language files can be finded.
 	 *
-	 * @return array
+	 * @return array|string[]
 	 */
 	public function getDirectories() : array
 	{
@@ -294,7 +294,7 @@ class Language
 	/**
 	 * Gets the list of available locales, lines and texts.
 	 *
-	 * @return array
+	 * @return array|array[]
 	 */
 	public function getLines() : array
 	{
@@ -304,7 +304,7 @@ class Language
 	/**
 	 * Gets the list of Supported Locales.
 	 *
-	 * @return array
+	 * @return array|string[]
 	 */
 	public function getSupportedLocales() : array
 	{
@@ -463,7 +463,7 @@ class Language
 	{
 		$this->findedLocales = [];
 		foreach ($this->languages as $locale => $files) {
-			foreach ($files as $file => $lines) {
+			foreach (\array_keys($files) as $file) {
 				foreach ($this->findFilenames($locale, $file) as $filename) {
 					$this->addLines($locale, $file, $this->getFileLines($filename));
 				}
