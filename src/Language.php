@@ -30,50 +30,36 @@ class Language
 	public const FALLBACK_PARENT = 1;
 	/**
 	 * The current locale.
-	 *
-	 * @var string
 	 */
-	protected $currentLocale;
+	protected string $currentLocale;
 	/**
 	 * The default locale.
-	 *
-	 * @var string
 	 */
-	protected $defaultLocale;
+	protected string $defaultLocale;
 	/**
 	 * List of directories to find for files.
-	 *
-	 * @var array
 	 */
-	protected $directories = [];
+	protected array $directories = [];
 	/**
 	 * The locale fallback level.
-	 *
-	 * @var int
 	 */
-	protected $fallbackLevel = Language::FALLBACK_DEFAULT;
+	protected int $fallbackLevel = Language::FALLBACK_DEFAULT;
 	/**
 	 * List with locales of already scanned directories.
-	 *
-	 * @var array
 	 */
-	protected $findedLocales = [];
+	protected array $findedLocales = [];
 	/**
 	 * Language lines.
 	 *
 	 * List of "locale" => "file" => "line" => "text"
-	 *
-	 * @var array
 	 */
-	protected $languages = [];
+	protected array $languages = [];
 	/**
 	 * Supported locales. Any other will be ignored.
 	 *
 	 * The default locale always is supported.
-	 *
-	 * @var array
 	 */
-	protected $supportedLocales = [];
+	protected array $supportedLocales = [];
 
 	/**
 	 * Language constructor.

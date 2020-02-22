@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
  */
 class LanguageTest extends TestCase
 {
-	/**
-	 * @var Language
-	 */
-	protected $language;
+	protected Language $language;
 
 	public function setUp() : void
 	{
