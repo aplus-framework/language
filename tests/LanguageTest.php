@@ -53,7 +53,7 @@ class LanguageTest extends TestCase
 		$time = 1534160671; // 2018-08-13 08:44:31
 		$this->assertEquals('13/08/2018', $this->language->date($time, null, 'pt-br'));
 		$this->assertEquals('13/08/2018', $this->language->date($time, 'short', 'pt-br'));
-		$this->assertEquals('13 de ago de 2018', $this->language->date($time, 'medium', 'pt-br'));
+		$this->assertEquals('13 de ago. de 2018', $this->language->date($time, 'medium', 'pt-br'));
 		$this->assertEquals('13 de agosto de 2018', $this->language->date($time, 'long', 'pt-br'));
 		$this->assertEquals(
 			'segunda-feira, 13 de agosto de 2018',
