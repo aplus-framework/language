@@ -1,5 +1,7 @@
 <?php namespace Framework\Language;
 
+use InvalidArgumentException;
+
 /**
  * Class Language.
  *
@@ -38,6 +40,8 @@ class Language
 	protected string $defaultLocale;
 	/**
 	 * List of directories to find for files.
+	 *
+	 * @var array|string[]
 	 */
 	protected array $directories = [];
 	/**
@@ -46,18 +50,24 @@ class Language
 	protected int $fallbackLevel = Language::FALLBACK_DEFAULT;
 	/**
 	 * List with locales of already scanned directories.
+	 *
+	 * @var array|string[]
 	 */
 	protected array $findedLocales = [];
 	/**
 	 * Language lines.
 	 *
 	 * List of "locale" => "file" => "line" => "text"
+	 *
+	 * @var array|array[]
 	 */
 	protected array $languages = [];
 	/**
 	 * Supported locales. Any other will be ignored.
 	 *
 	 * The default locale always is supported.
+	 *
+	 * @var array|string[]
 	 */
 	protected array $supportedLocales = [];
 
@@ -77,7 +87,7 @@ class Language
 	}
 
 	/**
-	 * Adds a locale to the list of directories aleady scanned.
+	 * Adds a locale to the list of already scanned directories.
 	 *
 	 * @param string $locale
 	 *
@@ -96,9 +106,9 @@ class Language
 	 *
 	 * NOTE: This function always will replace the old lines, as given from files.
 	 *
-	 * @param string $locale The locale code
-	 * @param string $file   The file name
-	 * @param array  $lines  An array of "line" => "text"
+	 * @param string         $locale The locale code
+	 * @param string         $file   The file name
+	 * @param array|string[] $lines  An array of "line" => "text"
 	 *
 	 * @return $this
 	 */
@@ -139,14 +149,14 @@ class Language
 	 * @param string|null $style  One of: short, medium, long or full. Leave null to use short
 	 * @param string|null $locale A custom locale or null to use the current
 	 *
-	 * @throws \InvalidArgumentException for invalid style format
+	 * @throws InvalidArgumentException for invalid style format
 	 *
 	 * @return string
 	 */
 	public function date(int $time, string $style = null, string $locale = null) : string
 	{
 		if ($style && ! \in_array($style, ['short', 'medium', 'long', 'full'], true)) {
-			throw new \InvalidArgumentException('Invalid date style format: ' . $style);
+			throw new InvalidArgumentException('Invalid date style format: ' . $style);
 		}
 		$style = $style ?: 'short';
 		return (string) \MessageFormatter::formatMessage(
@@ -223,7 +233,7 @@ class Language
 	 * @param string $file   The file
 	 * @param string $line   The line
 	 *
-	 * @return array Two numeric keys containg the used locale and text
+	 * @return array|string[] Two numeric keys containg the used locale and text
 	 */
 	protected function getFallbackLine(string $locale, string $file, string $line) : array
 	{
@@ -248,6 +258,11 @@ class Language
 		];
 	}
 
+	/**
+	 * @param string $filename
+	 *
+	 * @return array|string[]
+	 */
 	protected function getFileLines(string $filename) : array
 	{
 		return require $filename;
@@ -298,7 +313,7 @@ class Language
 	}
 
 	/**
-	 * Tells if a locale already was finded in the directories.
+	 * Tells if a locale already was found in the directories.
 	 *
 	 * @param string $locale The locale
 	 *
@@ -312,19 +327,18 @@ class Language
 	}
 
 	/**
-	 * Renders a language file line with dot nottation format.
+	 * Renders a language file line with dot notation format.
 	 *
-	 * I.g. home.hello matchs home for file and hello for line.
+	 * I.g. home.hello matches home for file and hello for line.
 	 *
-	 * @param string      $line   The dot nottation file line
-	 * @param array       $args   The arguments to be used in the formatted text
-	 * @param string|null $locale A custom locale or null to use the current
+	 * @param string         $line   The dot notation file line
+	 * @param array|string[] $args   The arguments to be used in the formatted text
+	 * @param string|null    $locale A custom locale or null to use the current
 	 *
 	 * @return string|null The rendered text or null if not found
 	 */
-	public function lang(string $line, $args = [], string $locale = null) : ?string
+	public function lang(string $line, array $args = [], string $locale = null) : ?string
 	{
-		$args = \is_array($args) ? $args : [$args];
 		[$file, $line] = \explode('.', $line, 2);
 		return $this->render($file, $line, $args, $locale);
 	}
@@ -349,12 +363,12 @@ class Language
 	/**
 	 * Renders a language file line.
 	 *
-	 * @param string      $file   The file
-	 * @param string      $line   The file line
-	 * @param array       $args   The arguments to be used in the formatted text
-	 * @param string|null $locale A custom locale or null to use the current
+	 * @param string         $file   The file
+	 * @param string         $line   The file line
+	 * @param array|string[] $args   The arguments to be used in the formatted text
+	 * @param string|null    $locale A custom locale or null to use the current
 	 *
-	 * @return string|null The rendered text or null if not found
+	 * @return string The rendered text or file.line expression
 	 */
 	public function render(
 		string $file,
@@ -414,11 +428,11 @@ class Language
 	}
 
 	/**
-	 * Sets a list of directories where language files can be finded.
+	 * Sets a list of directories where language files can be found.
 	 *
-	 * @param array $directories a list of valid directory paths
+	 * @param array|string[] $directories a list of valid directory paths
 	 *
-	 * @throws \InvalidArgumentException if a directory path is inaccessible
+	 * @throws InvalidArgumentException if a directory path is inaccessible
 	 *
 	 * @return $this
 	 */
@@ -428,7 +442,7 @@ class Language
 		foreach ($directories as $directory) {
 			$path = \realpath($directory);
 			if ( ! $path || ! \is_dir($path)) {
-				throw new \InvalidArgumentException('Directory path inaccessible: ' . $directory);
+				throw new InvalidArgumentException('Directory path inaccessible: ' . $directory);
 			}
 			$dirs[] = $path . \DIRECTORY_SEPARATOR;
 		}
@@ -437,6 +451,11 @@ class Language
 		return $this;
 	}
 
+	/**
+	 * @param string $directory
+	 *
+	 * @return $this
+	 */
 	public function addDirectory(string $directory)
 	{
 		$this->setDirectories(\array_merge([
@@ -445,7 +464,7 @@ class Language
 		return $this;
 	}
 
-	protected function reindex()
+	protected function reindex() : void
 	{
 		$this->findedLocales = [];
 		foreach ($this->languages as $locale => $files) {
@@ -472,7 +491,7 @@ class Language
 			static::FALLBACK_PARENT,
 			static::FALLBACK_DEFAULT,
 		], true)) {
-			throw new \InvalidArgumentException('Invalid fallback level: ' . $level);
+			throw new InvalidArgumentException('Invalid fallback level: ' . $level);
 		}
 		$this->fallbackLevel = $level;
 		return $this;
@@ -484,7 +503,7 @@ class Language
 	 * NOTE: the default locale always is supported. But the current can be exclude if this funcion
 	 * is called after {@see Language::setCurrentLocale()}.
 	 *
-	 * @param array $locales the supported locales
+	 * @param array|string[] $locales the supported locales
 	 *
 	 * @return $this
 	 */
