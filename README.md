@@ -1,4 +1,4 @@
-# Framework Language Library
+# The Framework Language Library
 
 - [Homepage](https://the-framework.gitlab.io/libraries/language.html)
 - [API Documentation](https://the-framework.gitlab.io/libraries/language/docs/)
