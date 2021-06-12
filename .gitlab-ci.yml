@@ -12,7 +12,7 @@ test:php:
     - composer install
   script:
     - composer normalize --dry-run --indent-size=1 --indent-style=tab
-    # - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+    - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
     - vendor/bin/phpstan analyse -vvv
     - vendor/bin/phpstan analyse --no-progress --error-format=gitlab > build/codequality.json
     - vendor/bin/phpunit --colors=never
