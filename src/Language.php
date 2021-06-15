@@ -266,7 +266,7 @@ class Language
 	 */
 	protected function getFileLines(string $filename) : array
 	{
-		return require $filename;
+		return require_isolated($filename);
 	}
 
 	/**
