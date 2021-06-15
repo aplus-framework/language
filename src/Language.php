@@ -6,8 +6,8 @@ use JetBrains\PhpStorm\ExpectedValues;
 /**
  * Class Language.
  *
- * @see   https://www.sitepoint.com/localization-demystified-understanding-php-intl/
- * @see   http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
+ * @see https://www.sitepoint.com/localization-demystified-understanding-php-intl/
+ * @see http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
  */
 class Language
 {
@@ -42,7 +42,7 @@ class Language
 	/**
 	 * List of directories to find for files.
 	 *
-	 * @var array|string[]
+	 * @var array<int,string>
 	 */
 	protected array $directories = [];
 	/**
@@ -52,7 +52,7 @@ class Language
 	/**
 	 * List with locales of already scanned directories.
 	 *
-	 * @var array|string[]
+	 * @var array<int,string>
 	 */
 	protected array $findedLocales = [];
 	/**
@@ -60,7 +60,7 @@ class Language
 	 *
 	 * List of "locale" => "file" => "line" => "text"
 	 *
-	 * @var array|array[]
+	 * @var array<string,array>
 	 */
 	protected array $languages = [];
 	/**
@@ -68,15 +68,15 @@ class Language
 	 *
 	 * The default locale always is supported.
 	 *
-	 * @var array|string[]
+	 * @var array<int,string>
 	 */
 	protected array $supportedLocales = [];
 
 	/**
 	 * Language constructor.
 	 *
-	 * @param string         $locale      The default (and current) locale code
-	 * @param array|string[] $directories List of directory paths to find for language files
+	 * @param string $locale The default (and current) locale code
+	 * @param array<int,string> $directories List of directory paths to find for language files
 	 */
 	public function __construct(string $locale, array $directories = [])
 	{
@@ -107,9 +107,9 @@ class Language
 	 *
 	 * NOTE: This function always will replace the old lines, as given from files.
 	 *
-	 * @param string         $locale The locale code
-	 * @param string         $file   The file name
-	 * @param array|string[] $lines  An array of "line" => "text"
+	 * @param string $locale The locale code
+	 * @param string $file The file name
+	 * @param array<int|string,string> $lines An array of "line" => "text"
 	 *
 	 * @return $this
 	 */
@@ -129,9 +129,9 @@ class Language
 	/**
 	 * Gets a currency value formatted in a given locale.
 	 *
-	 * @param float       $value    The money value
-	 * @param string      $currency The Currency code. i.e. USD, BRL, JPY
-	 * @param string|null $locale   A custom locale or null to use the current
+	 * @param float $value The money value
+	 * @param string $currency The Currency code. i.e. USD, BRL, JPY
+	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @return string
 	 */
@@ -146,8 +146,8 @@ class Language
 	/**
 	 * Gets a formatted date in a given locale.
 	 *
-	 * @param int         $time   An Unix timestamp
-	 * @param string|null $style  One of: short, medium, long or full. Leave null to use short
+	 * @param int $time An Unix timestamp
+	 * @param string|null $style One of: short, medium, long or full. Leave null to use short
 	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @throws InvalidArgumentException for invalid style format
@@ -171,9 +171,9 @@ class Language
 	 * Find for absolute file paths from where language lines can be loaded.
 	 *
 	 * @param string $locale The required locale
-	 * @param string $file   The required file
+	 * @param string $file The required file
 	 *
-	 * @return array|string[] a list of valid filenames
+	 * @return array<int,string> a list of valid filenames
 	 */
 	protected function findFilenames(string $locale, string $file) : array
 	{
@@ -210,7 +210,7 @@ class Language
 	/**
 	 * Gets the list of directories where language files can be finded.
 	 *
-	 * @return array|string[]
+	 * @return array<int,string>
 	 */
 	public function getDirectories() : array
 	{
@@ -231,10 +231,10 @@ class Language
 	 * Gets a text line and locale according the Fallback Level.
 	 *
 	 * @param string $locale The locale to get his fallback line
-	 * @param string $file   The file
-	 * @param string $line   The line
+	 * @param string $file The file
+	 * @param string $line The line
 	 *
-	 * @return array|string[] Two numeric keys containg the used locale and text
+	 * @return array<int,string|null> Two numeric keys containg the used locale and text
 	 */
 	protected function getFallbackLine(string $locale, string $file, string $line) : array
 	{
@@ -262,7 +262,7 @@ class Language
 	/**
 	 * @param string $filename
 	 *
-	 * @return array|string[]
+	 * @return array<int,string>
 	 */
 	protected function getFileLines(string $filename) : array
 	{
@@ -273,8 +273,8 @@ class Language
 	 * Gets a language line text.
 	 *
 	 * @param string $locale The required locale
-	 * @param string $file   The require file
-	 * @param string $line   The require line
+	 * @param string $file The require file
+	 * @param string $line The require line
 	 *
 	 * @return string|null The text of the line or null if the line is not found
 	 */
@@ -296,7 +296,7 @@ class Language
 	/**
 	 * Gets the list of available locales, lines and texts.
 	 *
-	 * @return array|array[]
+	 * @return array<string,array>
 	 */
 	public function getLines() : array
 	{
@@ -306,7 +306,7 @@ class Language
 	/**
 	 * Gets the list of Supported Locales.
 	 *
-	 * @return array|string[]
+	 * @return array<int,string>
 	 */
 	public function getSupportedLocales() : array
 	{
@@ -330,11 +330,11 @@ class Language
 	/**
 	 * Renders a language file line with dot notation format.
 	 *
-	 * I.g. home.hello matches home for file and hello for line.
+	 * E.g. home.hello matches home for file and hello for line.
 	 *
-	 * @param string         $line   The dot notation file line
-	 * @param array|string[] $args   The arguments to be used in the formatted text
-	 * @param string|null    $locale A custom locale or null to use the current
+	 * @param string $line The dot notation file line
+	 * @param array<int,string> $args The arguments to be used in the formatted text
+	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @return string|null The rendered text or null if not found
 	 */
@@ -347,7 +347,7 @@ class Language
 	/**
 	 * Gets an ordinal number in a given locale.
 	 *
-	 * @param int         $number The number to be converted to ordinal
+	 * @param int $number The number to be converted to ordinal
 	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @return string
@@ -364,10 +364,10 @@ class Language
 	/**
 	 * Renders a language file line.
 	 *
-	 * @param string         $file   The file
-	 * @param string         $line   The file line
-	 * @param array|string[] $args   The arguments to be used in the formatted text
-	 * @param string|null    $locale A custom locale or null to use the current
+	 * @param string $file The file
+	 * @param string $line The file line
+	 * @param array<int,string> $args The arguments to be used in the formatted text
+	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @return string The rendered text or file.line expression
 	 */
@@ -397,8 +397,8 @@ class Language
 	/**
 	 * Sets the current locale.
 	 *
-	 * @param string $locale The current locale. This automatically is set as one of Supported
-	 *                       Locales.
+	 * @param string $locale The current locale. This automatically is set as
+	 * one of Supported Locales.
 	 *
 	 * @return $this
 	 */
@@ -414,8 +414,8 @@ class Language
 	/**
 	 * Sets the default locale.
 	 *
-	 * @param string $locale The default locale. This automatically is set as one of Supported
-	 *                       Locales.
+	 * @param string $locale The default locale. This automatically is set as
+	 * one of Supported Locales.
 	 *
 	 * @return $this
 	 */
@@ -431,7 +431,7 @@ class Language
 	/**
 	 * Sets a list of directories where language files can be found.
 	 *
-	 * @param array|string[] $directories a list of valid directory paths
+	 * @param array<int,string> $directories a list of valid directory paths
 	 *
 	 * @throws InvalidArgumentException if a directory path is inaccessible
 	 *
@@ -505,10 +505,10 @@ class Language
 	/**
 	 * Sets a list of Supported Locales.
 	 *
-	 * NOTE: the default locale always is supported. But the current can be exclude if this funcion
-	 * is called after {@see Language::setCurrentLocale()}.
+	 * NOTE: the default locale always is supported. But the current can be exclude
+	 * if this function is called after {@see Language::setCurrentLocale()}.
 	 *
-	 * @param array|string[] $locales the supported locales
+	 * @param array<int,string> $locales the supported locales
 	 *
 	 * @return $this
 	 */
