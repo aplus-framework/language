@@ -198,6 +198,16 @@ class Language
 	}
 
 	/**
+	 * Gets the current locale directionality.
+	 *
+	 * @return string 'ltr' for Left-To-Right ot 'rtl' for Right-To-Left
+	 */
+	public function getCurrentLocaleDirection() : string
+	{
+		return static::getLocaleDirection($this->getCurrentLocale());
+	}
+
+	/**
 	 * Gets the default locale.
 	 *
 	 * @return string
@@ -485,12 +495,13 @@ class Language
 	 *
 	 * @return $this
 	 */
-	public function setFallbackLevel(#[ExpectedValues([
-		Language::FALLBACK_NONE,
-		Language::FALLBACK_PARENT,
-		Language::FALLBACK_DEFAULT,
-	])] int $level)
-	{
+	public function setFallbackLevel(
+		#[ExpectedValues([
+			Language::FALLBACK_NONE,
+			Language::FALLBACK_PARENT,
+			Language::FALLBACK_DEFAULT,
+		])] int $level
+	) {
 		if ( ! \in_array($level, [
 			static::FALLBACK_NONE,
 			static::FALLBACK_PARENT,
@@ -520,5 +531,39 @@ class Language
 		$this->supportedLocales = $locales;
 		$this->reindex();
 		return $this;
+	}
+
+	/**
+	 * Gets text directionality based on locale.
+	 *
+	 * @param string $locale The locale code
+	 *
+	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
+	 * @see https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code
+	 *
+	 * @return string 'ltr' for Left-To-Right ot 'rtl' for Right-To-Left
+	 */
+	public static function getLocaleDirection(string $locale) : string
+	{
+		$locale = \strtolower($locale);
+		$locale = \strtr($locale, ['_' => '-']);
+		if (\in_array($locale, [
+			'ar',
+			'arc',
+			'ckb',
+			'dv',
+			'fa',
+			'ha',
+			'he',
+			'khw',
+			'ks',
+			'ps',
+			'ur',
+			'uz-af',
+			'yi',
+		], true)) {
+			return 'rtl';
+		}
+		return 'ltr';
 	}
 }
