@@ -11,6 +11,7 @@ namespace Framework\Language;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ExpectedValues;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class Language.
@@ -184,6 +185,7 @@ class Language
 	 *
 	 * @return array<int,string> a list of valid filenames
 	 */
+	#[Pure]
 	protected function findFilenames(string $locale, string $file) : array
 	{
 		$filenames = [];
@@ -201,6 +203,7 @@ class Language
 	 *
 	 * @return string
 	 */
+	#[Pure]
 	public function getCurrentLocale() : string
 	{
 		return $this->currentLocale;
@@ -211,6 +214,7 @@ class Language
 	 *
 	 * @return string 'ltr' for Left-To-Right ot 'rtl' for Right-To-Left
 	 */
+	#[Pure]
 	public function getCurrentLocaleDirection() : string
 	{
 		return static::getLocaleDirection($this->getCurrentLocale());
@@ -221,6 +225,7 @@ class Language
 	 *
 	 * @return string
 	 */
+	#[Pure]
 	public function getDefaultLocale() : string
 	{
 		return $this->defaultLocale;
@@ -231,6 +236,7 @@ class Language
 	 *
 	 * @return array<int,string>
 	 */
+	#[Pure]
 	public function getDirectories() : array
 	{
 		return $this->directories;
@@ -241,6 +247,7 @@ class Language
 	 *
 	 * @return int One of the FALLBACK_* constants
 	 */
+	#[Pure]
 	public function getFallbackLevel() : int
 	{
 		return $this->fallbackLevel;
@@ -317,6 +324,7 @@ class Language
 	 *
 	 * @return array<string,array>
 	 */
+	#[Pure]
 	public function getLines() : array
 	{
 		return $this->languages;
@@ -327,6 +335,7 @@ class Language
 	 *
 	 * @return array<int,string>
 	 */
+	#[Pure]
 	public function getSupportedLocales() : array
 	{
 		return $this->supportedLocales;
@@ -341,6 +350,7 @@ class Language
 	 *
 	 * @return bool
 	 */
+	#[Pure]
 	protected function isFindedLocale(string $locale) : bool
 	{
 		return \in_array($locale, $this->findedLocales, true);
@@ -552,6 +562,7 @@ class Language
 	 *
 	 * @return string 'ltr' for Left-To-Right ot 'rtl' for Right-To-Left
 	 */
+	#[Pure]
 	public static function getLocaleDirection(string $locale) : string
 	{
 		$locale = \strtolower($locale);
