@@ -101,9 +101,9 @@ class Language
 	 *
 	 * @param string $locale
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	protected function addFindedLocale(string $locale)
+	protected function addFindedLocale(string $locale) : static
 	{
 		$this->findedLocales[] = $locale;
 		return $this;
@@ -120,9 +120,9 @@ class Language
 	 * @param string $file The file name
 	 * @param array<int|string,string> $lines An array of "line" => "text"
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function addLines(string $locale, string $file, array $lines)
+	public function addLines(string $locale, string $file, array $lines) : static
 	{
 		if ( ! $this->isFindedLocale($locale)) {
 			// Certify that all directories are scanned first
@@ -419,9 +419,9 @@ class Language
 	 * @param string $locale The current locale. This automatically is set as
 	 * one of Supported Locales.
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setCurrentLocale(string $locale)
+	public function setCurrentLocale(string $locale) : static
 	{
 		$this->currentLocale = $locale;
 		$locales = $this->getSupportedLocales();
@@ -436,9 +436,9 @@ class Language
 	 * @param string $locale The default locale. This automatically is set as
 	 * one of Supported Locales.
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setDefaultLocale(string $locale)
+	public function setDefaultLocale(string $locale) : static
 	{
 		$this->defaultLocale = $locale;
 		$locales = $this->getSupportedLocales();
@@ -454,9 +454,9 @@ class Language
 	 *
 	 * @throws InvalidArgumentException if a directory path is inaccessible
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setDirectories(array $directories)
+	public function setDirectories(array $directories) : static
 	{
 		$dirs = [];
 		foreach ($directories as $directory) {
@@ -474,9 +474,9 @@ class Language
 	/**
 	 * @param string $directory
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function addDirectory(string $directory)
+	public function addDirectory(string $directory) : static
 	{
 		$this->setDirectories(\array_merge([
 			$directory,
@@ -502,7 +502,7 @@ class Language
 	 *
 	 * @param int $level one of the FALLBACK_* constants
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function setFallbackLevel(
 		#[ExpectedValues([
@@ -510,7 +510,7 @@ class Language
 			Language::FALLBACK_PARENT,
 			Language::FALLBACK_DEFAULT,
 		])] int $level
-	) {
+	) : static {
 		if ( ! \in_array($level, [
 			static::FALLBACK_NONE,
 			static::FALLBACK_PARENT,
@@ -530,9 +530,9 @@ class Language
 	 *
 	 * @param array<int,string> $locales the supported locales
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setSupportedLocales(array $locales)
+	public function setSupportedLocales(array $locales) : static
 	{
 		$locales[] = $this->getDefaultLocale();
 		$locales = \array_unique($locales);
