@@ -362,7 +362,7 @@ class Language
 	 * E.g. home.hello matches home for file and hello for line.
 	 *
 	 * @param string $line The dot notation file line
-	 * @param array<int,string> $args The arguments to be used in the formatted text
+	 * @param array<int|string,string> $args The arguments to be used in the formatted text
 	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @return string|null The rendered text or null if not found
@@ -395,7 +395,7 @@ class Language
 	 *
 	 * @param string $file The file
 	 * @param string $line The file line
-	 * @param array<int,string> $args The arguments to be used in the formatted text
+	 * @param array<int|string,string> $args The arguments to be used in the formatted text
 	 * @param string|null $locale A custom locale or null to use the current
 	 *
 	 * @return string The rendered text or file.line expression

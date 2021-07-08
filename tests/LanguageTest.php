@@ -241,6 +241,30 @@ final class LanguageTest extends TestCase
 		);
 	}
 
+	public function testRenderWithMixedArgsKeys() : void
+	{
+		$this->language->addLines('en', 'hello', [
+			'int' => 'Hello, {0}!',
+			'string' => 'Hello, {name}!',
+		]);
+		self::assertSame(
+			'Hello, Mary!',
+			$this->language->render('hello', 'int', ['Mary'])
+		);
+		self::assertSame(
+			'Hello, {0}!',
+			$this->language->render('hello', 'int', ['name' => 'Mary'])
+		);
+		self::assertSame(
+			'Hello, Mary!',
+			$this->language->render('hello', 'string', ['name' => 'Mary'])
+		);
+		self::assertSame(
+			'Hello, {name}!',
+			$this->language->render('hello', 'string', ['Mary'])
+		);
+	}
+
 	public function testSupportedLocales() : void
 	{
 		self::assertSame(['en'], $this->language->getSupportedLocales());
