@@ -265,6 +265,25 @@ final class LanguageTest extends TestCase
 		);
 	}
 
+	public function testRenderWithMessageFormatterPattern() : void
+	{
+		$this->language->addLines('en', 'time', [
+			'daysAgo' => '{0, plural, =1{# day} other{# days}} ago',
+		]);
+		self::assertSame(
+			'0 days ago',
+			$this->language->render('time', 'daysAgo', [0])
+		);
+		self::assertSame(
+			'1 day ago',
+			$this->language->render('time', 'daysAgo', [1])
+		);
+		self::assertSame(
+			'2 days ago',
+			$this->language->render('time', 'daysAgo', [2])
+		);
+	}
+
 	public function testSupportedLocales() : void
 	{
 		self::assertSame(['en'], $this->language->getSupportedLocales());
