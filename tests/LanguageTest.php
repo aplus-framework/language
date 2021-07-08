@@ -265,6 +265,20 @@ final class LanguageTest extends TestCase
 		);
 	}
 
+	public function testRenderWithStringableArgs() : void
+	{
+		$stringable = new class() {
+			public function __toString() : string
+			{
+				return 'Mary Jane';
+			}
+		};
+		self::assertSame(
+			'Hello, Mary Jane!',
+			$this->language->render('tests', 'hello', [$stringable])
+		);
+	}
+
 	public function testRenderWithMessageFormatterPattern() : void
 	{
 		$this->language->addLines('en', 'time', [
