@@ -10,6 +10,7 @@
 namespace Framework\Language;
 
 use InvalidArgumentException;
+use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\ExpectedValues;
 use JetBrains\PhpStorm\Pure;
 
@@ -262,6 +263,7 @@ class Language
 	 *
 	 * @return array<int,string|null> Two numeric keys containg the used locale and text
 	 */
+	#[ArrayShape(['string', 'string|null'])]
 	protected function getFallbackLine(string $locale, string $file, string $line) : array
 	{
 		$text = null;
