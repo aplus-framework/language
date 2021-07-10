@@ -21,7 +21,8 @@
 	],
 	"require": {
 		"php": ">=8.0",
-		"ext-intl": "*"
+		"ext-intl": "*",
+		"natanfelles/helpers": "^2.1"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
