@@ -294,7 +294,10 @@ class Language
 	 */
 	protected function getFileLines(string $filename) : array
 	{
-		return require_isolated($filename);
+		// Require the $filename in a isolated scope - no access to $this
+		return (static function () use ($filename) {
+			return require $filename;
+		})();
 	}
 
 	/**
