@@ -8,5 +8,5 @@
  * file that was distributed with this source code.
  */
 return [
-	'hello' => 'Olá, {0}!',
+    'hello' => 'Olá, {0}!',
 ];

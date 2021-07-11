@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 return [
-	'bye' => 'Hasta la vista, baby.',
-	'bus' => 'bus',
-	'ice_cream' => 'ice cream',
+    'bye' => 'Hasta la vista, baby.',
+    'bus' => 'bus',
+    'ice_cream' => 'ice cream',
 ];

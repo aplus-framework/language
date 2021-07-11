@@ -8,6 +8,6 @@
  * file that was distributed with this source code.
  */
 return [
-	'bye' => 'Bye!',
-	'hello' => 'Hello, {0}!',
+    'bye' => 'Bye!',
+    'hello' => 'Hello, {0}!',
 ];

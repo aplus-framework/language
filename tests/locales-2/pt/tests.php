@@ -8,6 +8,6 @@
  * file that was distributed with this source code.
  */
 return [
-	'bus' => 'autocarro',
-	'ice_cream' => 'gelado',
+    'bus' => 'autocarro',
+    'ice_cream' => 'gelado',
 ];
