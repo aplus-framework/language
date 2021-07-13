@@ -4,11 +4,13 @@
     "description": "The Framework Language Library",
     "keywords": [
         "language",
+        "lang",
         "locale",
         "localization",
         "internationalization",
         "i18n",
-        "L10n"
+        "l10n",
+        "intl"
     ],
     "homepage": "https://the-framework.gitlab.io/libraries/language.html",
     "license": "MIT",
