@@ -1,7 +1,7 @@
 {
-    "name": "natanfelles/language",
+    "name": "aplus/language",
     "type": "library",
-    "description": "The Framework Language Library",
+    "description": "Aplus Framework Language Library",
     "keywords": [
         "language",
         "lang",
@@ -12,7 +12,7 @@
         "l10n",
         "intl"
     ],
-    "homepage": "https://the-framework.gitlab.io/libraries/language.html",
+    "homepage": "https://aplus-framework.gitlab.io/docs/language",
     "license": "MIT",
     "authors": [
         {
@@ -54,9 +54,9 @@
     "prefer-stable": true,
     "support": {
         "email": "natanfelles@gmail.com",
-        "issues": "https://gitlab.com/the-framework/libraries/language/issues",
-        "wiki": "https://gitlab.com/the-framework/libraries/language/wikis/home",
-        "source": "https://gitlab.com/the-framework/libraries/language",
-        "docs": "https://the-framework.gitlab.io/libraries/language/docs/"
+        "issues": "https://gitlab.com/aplus-framework/libraries/language/issues",
+        "wiki": "https://gitlab.com/aplus-framework/libraries/language/wikis/home",
+        "source": "https://gitlab.com/aplus-framework/libraries/language",
+        "docs": "https://aplus-framework.gitlab.io/libraries/language/docs/"
     }
 }
