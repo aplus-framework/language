@@ -302,8 +302,8 @@ class Language
      * Gets a language line text.
      *
      * @param string $locale The required locale
-     * @param string $file The require file
-     * @param string $line The require line
+     * @param string $file The required file
+     * @param string $line The required line
      *
      * @return string|null The text of the line or null if the line is not found
      */
@@ -409,24 +409,31 @@ class Language
         array $args = [],
         string $locale = null
     ) : string {
-        $locale = $locale ?? $this->getCurrentLocale();
+        $locale ??= $this->getCurrentLocale();
         $text = $this->getLine($locale, $file, $line);
         if ($text === null) {
             [$locale, $text] = $this->getFallbackLine($locale, $file, $line);
         }
         if ($text !== null) {
-            $args = \array_map(static function ($arg) : string {
-                return (string) $arg;
-            }, $args);
-            $new_text = \MessageFormatter::formatMessage(
-                $locale,
-                $text,
-                $args
-            );
-            // If formatter fail, use the non-formatted text
-            $text = $new_text ?: $text;
+            $text = $this->formatMessage($text, $args, $locale);
         }
-        return $text ?: $file . '.' . $line;
+        return $text ?? ($file . '.' . $line);
+    }
+
+    /**
+     * @param string $text
+     * @param array<int|string,mixed> $args
+     * @param string|null $locale
+     *
+     * @return string
+     */
+    public function formatMessage(string $text, array $args = [], string $locale = null) : string
+    {
+        $args = \array_map(static function ($arg) : string {
+            return (string) $arg;
+        }, $args);
+        $locale ??= $this->getCurrentLocale();
+        return \MessageFormatter::formatMessage($locale, $text, $args) ?: $text;
     }
 
     /**
