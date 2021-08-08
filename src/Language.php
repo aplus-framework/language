@@ -20,6 +20,8 @@ use JetBrains\PhpStorm\Pure;
  *
  * @see https://www.sitepoint.com/localization-demystified-understanding-php-intl/
  * @see http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
+ *
+ * @package language
  */
 class Language
 {
