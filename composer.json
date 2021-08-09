@@ -12,7 +12,7 @@
         "l10n",
         "intl"
     ],
-    "homepage": "https://aplus-framework.gitlab.io/docs/language",
+    "homepage": "https://docs.aplus-framework.com/guides/libraries/language/",
     "license": "MIT",
     "authors": [
         {
@@ -57,6 +57,6 @@
         "issues": "https://gitlab.com/aplus-framework/libraries/language/issues",
         "wiki": "https://gitlab.com/aplus-framework/libraries/language/wikis/home",
         "source": "https://gitlab.com/aplus-framework/libraries/language",
-        "docs": "https://aplus-framework.gitlab.io/libraries/language/docs/"
+        "docs": "https://docs.aplus-framework.com/guides/libraries/language/"
     }
 }
