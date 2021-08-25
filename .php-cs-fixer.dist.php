@@ -10,8 +10,11 @@
 use Framework\CodingStandard\Config;
 use Framework\CodingStandard\Finder;
 
-return (new Config())->setFinder(
-    Finder::create()->in(__DIR__)
+return (new Config())->setDefaultHeaderComment(
+    'Aplus Framework Language Library',
+    'Natan Felles <natanfelles@gmail.com>'
 )->replaceRules([
     'non_printable_character' => false,
-])->setDefaultHeaderComment('Aplus Framework Language Library');
+])->setFinder(
+    Finder::create()->in(__DIR__)
+);
