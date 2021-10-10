@@ -1,3 +1,5 @@
+<a href="https://gitlab.com/aplus-framework/libraries/language"><img src="https://gitlab.com/aplus-framework/libraries/language/-/raw/master/guide/image.png" alt="Aplus Framework Language Library" align="right" width="100"></a>
+
 # Aplus Framework Language Library
 
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/language/index.html)
