@@ -1,6 +1,9 @@
 Language
 ========
 
+.. image:: image.png
+    :alt: Aplus Framework Language Library
+
 Aplus Framework Language Library.
 
 - `Installation`_
