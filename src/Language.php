@@ -19,7 +19,7 @@ use JetBrains\PhpStorm\Pure;
  * Class Language.
  *
  * @see https://www.sitepoint.com/localization-demystified-understanding-php-intl/
- * @see http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
+ * @see https://unicode-org.github.io/icu-docs/#/icu4c/classMessageFormat.html
  *
  * @package language
  */
@@ -80,7 +80,7 @@ class Language
     /**
      * Supported locales. Any other will be ignored.
      *
-     * The default locale always is supported.
+     * The default locale is always supported.
      *
      * @var array<int,string>
      */
@@ -119,7 +119,7 @@ class Language
      *
      * Useful to set lines from a database or any parsed file.
      *
-     * NOTE: This function always will replace the old lines, as given from files.
+     * NOTE: This function will always replace the old lines, as given from files.
      *
      * @param string $locale The locale code
      * @param string $file The file name
@@ -146,6 +146,8 @@ class Language
      * @param float $value The money value
      * @param string $currency The Currency code. i.e. USD, BRL, JPY
      * @param string|null $locale A custom locale or null to use the current
+     *
+     * @see https://en.wikipedia.org/wiki/ISO_4217#Active_codes
      *
      * @return string
      */
