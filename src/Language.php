@@ -12,7 +12,6 @@ namespace Framework\Language;
 use Framework\Helpers\Isolation;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\ExpectedValues;
 use JetBrains\PhpStorm\Pure;
 
 /**
@@ -531,13 +530,8 @@ class Language
      *
      * @return static
      */
-    public function setFallbackLevel(
-        #[ExpectedValues([
-            Language::FALLBACK_NONE,
-            Language::FALLBACK_PARENT,
-            Language::FALLBACK_DEFAULT,
-        ])] int $level
-    ) : static {
+    public function setFallbackLevel(int $level) : static
+    {
         if ( ! \in_array($level, [
             static::FALLBACK_NONE,
             static::FALLBACK_PARENT,
