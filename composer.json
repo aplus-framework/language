@@ -12,7 +12,7 @@
         "l10n",
         "intl"
     ],
-    "homepage": "https://docs.aplus-framework.com/guides/libraries/language/",
+    "homepage": "https://aplus-framework.com/packages/language",
     "license": "MIT",
     "authors": [
         {
@@ -55,13 +55,13 @@
     "support": {
         "email": "support@aplus-framework.com",
         "issues": "https://gitlab.com/aplus-framework/libraries/language/issues",
-        "wiki": "https://gitlab.com/aplus-framework/libraries/language/wikis/home",
+        "forum": "https://aplus-framework.com/forum",
         "source": "https://gitlab.com/aplus-framework/libraries/language",
         "docs": "https://docs.aplus-framework.com/guides/libraries/language/"
     },
     "funding": [
         {
-            "type": "other",
+            "type": "Aplus Sponsor",
             "url": "https://aplus-framework.com/sponsor"
         }
     ]
