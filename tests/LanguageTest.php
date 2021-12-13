@@ -298,6 +298,12 @@ final class LanguageTest extends TestCase
         );
     }
 
+    public function testHasLine() : void
+    {
+        self::assertFalse($this->language->hasLine('tests', 'unknown'));
+        self::assertTrue($this->language->hasLine('tests', 'bye'));
+    }
+
     public function testSupportedLocales() : void
     {
         self::assertSame(['en'], $this->language->getSupportedLocales());

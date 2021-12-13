@@ -424,6 +424,25 @@ class Language
     }
 
     /**
+     * Checks if Language has a line.
+     *
+     * @param string $file The file
+     * @param string $line The file line
+     * @param string|null $locale A custom locale or null to use the current
+     *
+     * @return bool True if the line is found, otherwise false
+     */
+    public function hasLine(string $file, string $line, string $locale = null) : bool
+    {
+        $locale ??= $this->getCurrentLocale();
+        $text = $this->getLine($locale, $file, $line);
+        if ($text === null) {
+            $text = $this->getFallbackLine($locale, $file, $line)[1];
+        }
+        return $text !== null;
+    }
+
+    /**
      * @param string $text
      * @param array<int|string,mixed> $args
      * @param string|null $locale
