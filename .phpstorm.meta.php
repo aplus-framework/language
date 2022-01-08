@@ -472,6 +472,11 @@ registerArgumentsSet(
     'zh-yue',
     'zu',
 );
+registerArgumentsSet(
+    'locale_directions',
+    'ltr',
+    'rtl',
+);
 expectedArguments(
     \Framework\Language\Language::currency(),
     1,
@@ -541,4 +546,24 @@ expectedArguments(
     \Framework\Language\Language::setDefaultLocale(),
     0,
     argumentsSet('locales')
+);
+expectedReturnValues(
+    \Framework\Language\Language::getCurrentLocale(),
+    argumentsSet('locales')
+);
+expectedReturnValues(
+    \Framework\Language\Language::getCurrentLocaleDirection(),
+    argumentsSet('locale_directions')
+);
+expectedReturnValues(
+    \Framework\Language\Language::getDefaultLocale(),
+    argumentsSet('locales')
+);
+expectedReturnValues(
+    \Framework\Language\Language::getLocaleDirection(),
+    argumentsSet('locale_directions')
+);
+expectedReturnValues(
+    \Framework\Language\Language::getFallbackLevel(),
+    argumentsSet('fallback_levels')
 );
