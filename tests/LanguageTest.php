@@ -21,7 +21,7 @@ final class LanguageTest extends TestCase
 
     public function setUp() : void
     {
-        $this->language = new Language('en', [
+        $this->language = new Language(directories: [
             __DIR__ . '/locales-1',
         ]);
     }

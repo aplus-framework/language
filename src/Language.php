@@ -91,7 +91,7 @@ class Language
      * @param string $locale The default (and current) locale code
      * @param array<int,string> $directories List of directory paths to find for language files
      */
-    public function __construct(string $locale, array $directories = [])
+    public function __construct(string $locale = 'en', array $directories = [])
     {
         $this->setDefaultLocale($locale);
         $this->setCurrentLocale($locale);
