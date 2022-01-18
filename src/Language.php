@@ -336,6 +336,12 @@ class Language
         return $this->languages;
     }
 
+    public function resetLines() : static
+    {
+        $this->languages = [];
+        return $this;
+    }
+
     /**
      * Gets the list of Supported Locales.
      *

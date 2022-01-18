@@ -199,6 +199,15 @@ final class LanguageTest extends TestCase
         ], $this->language->getLines());
     }
 
+    public function testResetLines() : void
+    {
+        self::assertEmpty($this->language->getLines());
+        $this->language->render('tests', 'hello');
+        self::assertNotEmpty($this->language->getLines());
+        $this->language->resetLines();
+        self::assertEmpty($this->language->getLines());
+    }
+
     public function testOrdinal() : void
     {
         self::assertSame('1st', $this->language->ordinal(1));
