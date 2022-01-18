@@ -37,6 +37,7 @@
     "require": {
         "php": ">=8.0",
         "ext-intl": "*",
+        "aplus/debug": "^2.3",
         "aplus/helpers": "^2.2"
     },
     "require-dev": {
@@ -67,5 +68,10 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
     }
 }
