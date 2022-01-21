@@ -106,7 +106,9 @@ class LanguageCollector extends Collector
                 <tr>
                     <td><?= \htmlentities($line['file']) ?></td>
                     <td><?= \htmlentities($line['line']) ?></td>
-                    <td><?= \htmlentities($line['message']) ?></td>
+                    <td>
+                        <pre><code class="language-icu-message-format"><?= \htmlentities($line['message']) ?></code></pre>
+                    </td>
                     <td><?= \htmlentities($line['locale']) ?></td>
                     <td><?= \htmlentities($line['fallback']) ?></td>
                 </tr>
