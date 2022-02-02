@@ -29,6 +29,9 @@ class LanguageCollector extends Collector
 
     public function getContents() : string
     {
+        if ( ! isset($this->language)) {
+            return '<p>A Language instance has not been set on this collector.</p>';
+        }
         \ob_start(); ?>
         <p><strong>Default Locale:</strong> <?=
             \htmlentities($this->language->getDefaultLocale())
@@ -46,12 +49,52 @@ class LanguageCollector extends Collector
                 Language::FALLBACK_DEFAULT => 'default',
                 default => 'none',
         };
-        echo "${level} (${levelName})"; ?></p>
+        echo "{$level} ({$levelName})"; ?></p>
+        <h1>Rendered Messages</h1>
+        <?= $this->renderRenderedMessages() ?>
         <h1>Directories</h1>
         <?= $this->renderDirectories() ?>
-        <h1>Lines</h1>
+        <h1>Available Messages</h1>
         <?php
         echo $this->renderLines();
+        return \ob_get_clean(); // @phpstan-ignore-line
+    }
+
+    protected function renderRenderedMessages() : string
+    {
+        if ( ! $this->hasData()) {
+            return '<p>No message has been rendered.</p>';
+        }
+        $count = \count($this->getData());
+        \ob_start(); ?>
+        <p><?= $count ?> message<?= $count === 1 ? '' : 's' ?> has been rendered.</p>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>File</th>
+                <th>Line</th>
+                <th>Message</th>
+                <th>Locale</th>
+                <th title="Seconds">Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($this->getData() as $index => $data): ?>
+                <tr>
+                    <td><?= $index + 1 ?></td>
+                    <td><?= \htmlentities($data['file']) ?></td>
+                    <td><?= \htmlentities($data['line']) ?></td>
+                    <td>
+                        <pre><code class="language-html"><?= \htmlentities($data['message']) ?></code></pre>
+                    </td>
+                    <td><?= \htmlentities($data['locale']) ?></td>
+                    <td><?= \round($data['end'] - $data['start'], 6) ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+        <?php
         return \ob_get_clean(); // @phpstan-ignore-line
     }
 
@@ -61,16 +104,20 @@ class LanguageCollector extends Collector
         if (empty($directories)) {
             return '<p>No directory set for this Language instance.</p>';
         }
+        $count = \count($directories);
         \ob_start(); ?>
+        <p>There <?= $count === 1 ? 'is 1 directory' : "are {$count} directories" ?> set.</p>
         <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>Directory</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($this->language->getDirectories() as $directory): ?>
+            <?php foreach ($this->language->getDirectories() as $index => $directory): ?>
                 <tr>
+                    <td><?= $index + 1 ?></td>
                     <td><?= \htmlentities($directory) ?></td>
                 </tr>
             <?php endforeach ?>
@@ -84,26 +131,28 @@ class LanguageCollector extends Collector
     {
         $lines = $this->getLines();
         if (empty($lines)) {
-            return '<p>No message lines set for this Language instance.</p>';
+            return '<p>No file lines available for this Language instance.</p>';
         }
+        $count = \count($lines);
         \ob_start(); ?>
-        <p>Message lines available with fallbacks to the current locale (<?=
-            $this->language->getCurrentLocale()
-            ?>).
+        <p>There <?= $count === 1 ? 'is 1 message line' : "are {$count} message lines"
+            ?> available to the current locale (<?= $this->language->getCurrentLocale() ?>).
         </p>
         <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>File</th>
                 <th>Line</th>
-                <th>Message</th>
+                <th>Message Pattern</th>
                 <th>Locale</th>
                 <th>Fallback</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($lines as $line): ?>
+            <?php foreach ($lines as $index => $line): ?>
                 <tr>
+                    <td><?= $index + 1 ?></td>
                     <td><?= \htmlentities($line['file']) ?></td>
                     <td><?= \htmlentities($line['line']) ?></td>
                     <td>
