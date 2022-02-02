@@ -27,6 +27,21 @@ class LanguageCollector extends Collector
         return $this;
     }
 
+    public function getActivities() : array
+    {
+        $activities = [];
+        foreach ($this->getData() as $index => $data) {
+            $activities[] = [
+                'collector' => $this->getName(),
+                'class' => static::class,
+                'description' => 'Render message ' . $index + 1,
+                'start' => $data['start'],
+                'end' => $data['end'],
+            ];
+        }
+        return $activities;
+    }
+
     public function getContents() : string
     {
         if ( ! isset($this->language)) {

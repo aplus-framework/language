@@ -10,6 +10,7 @@
 namespace Framework\Language;
 
 use Framework\Helpers\Isolation;
+use Framework\Language\Debug\LanguageCollector;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
@@ -84,6 +85,7 @@ class Language
      * @var array<int,string>
      */
     protected array $supportedLocales = [];
+    protected LanguageCollector $debugCollector;
 
     /**
      * Language constructor.
@@ -418,6 +420,38 @@ class Language
         array $args = [],
         string $locale = null
     ) : string {
+        if (isset($this->debugCollector)) {
+            $start = \microtime(true);
+            $rendered = $this->getRenderedLine($file, $line, $args, $locale);
+            $end = \microtime(true);
+            $this->debugCollector->adddata([
+                'start' => $start,
+                'end' => $end,
+                'file' => $file,
+                'line' => $line,
+                'locale' => $rendered['locale'],
+                'message' => $rendered['message'],
+            ]);
+            return $rendered['message'];
+        }
+        return $this->getRenderedLine($file, $line, $args, $locale)['message'];
+    }
+
+    /**
+     * @param string $file
+     * @param string $line
+     * @param array<mixed> $args
+     * @param string|null $locale
+     *
+     * @return array<string,string>
+     */
+    #[ArrayShape(['locale' => 'string', 'message' => 'string'])]
+    protected function getRenderedLine(
+        string $file,
+        string $line,
+        array $args = [],
+        string $locale = null
+    ) : array {
         $locale ??= $this->getCurrentLocale();
         $text = $this->getLine($locale, $file, $line);
         if ($text === null) {
@@ -426,7 +460,11 @@ class Language
         if ($text !== null) {
             $text = $this->formatMessage($text, $args, $locale);
         }
-        return $text ?? ($file . '.' . $line);
+        // @phpstan-ignore-next-line
+        return [
+            'locale' => $locale,
+            'message' => $text ?? ($file . '.' . $line),
+        ];
     }
 
     /**
@@ -585,6 +623,13 @@ class Language
         \sort($locales);
         $this->supportedLocales = $locales;
         $this->reindex();
+        return $this;
+    }
+
+    public function setDebugCollector(LanguageCollector $debugCollector) : static
+    {
+        $this->debugCollector = $debugCollector;
+        $this->debugCollector->setLanguage($this);
         return $this;
     }
 
