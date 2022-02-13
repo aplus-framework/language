@@ -74,7 +74,7 @@ class Language
      *
      * List of "locale" => "file" => "line" => "text"
      *
-     * @var array<string,array>
+     * @var array<string,array<string,array<string,string>>>
      */
     protected array $languages = [];
     /**
@@ -330,7 +330,7 @@ class Language
     /**
      * Gets the list of available locales, lines and texts.
      *
-     * @return array<string,array>
+     * @return array<string,array<string,array<string,string>>>
      */
     #[Pure]
     public function getLines() : array
