@@ -321,10 +321,27 @@ class Language
             return null;
         }
         $this->addFindedLocale($locale);
+        $this->findLines($locale, $file);
+        return $this->languages[$locale][$file][$line] ?? null;
+    }
+
+    /**
+     * Find and add lines.
+     *
+     * This method can be overridden to find lines in custom storage, such as
+     * in a database table.
+     *
+     * @param string $locale
+     * @param string $file
+     *
+     * @return static
+     */
+    protected function findLines(string $locale, string $file) : static
+    {
         foreach ($this->findFilenames($locale, $file) as $filename) {
             $this->addLines($locale, $file, $this->getFileLines($filename));
         }
-        return $this->languages[$locale][$file][$line] ?? null;
+        return $this;
     }
 
     /**
@@ -578,9 +595,7 @@ class Language
         $this->findedLocales = [];
         foreach ($this->languages as $locale => $files) {
             foreach (\array_keys($files) as $file) {
-                foreach ($this->findFilenames($locale, $file) as $filename) {
-                    $this->addLines($locale, $file, $this->getFileLines($filename));
-                }
+                $this->findLines($locale, $file);
             }
             $this->addFindedLocale($locale);
         }
