@@ -124,7 +124,7 @@ class Language
      *
      * @param string $locale The locale code
      * @param string $file The file name
-     * @param array<int|string,string> $lines An array of "line" => "text"
+     * @param array<string> $lines An array of "line" => "text"
      *
      * @return static
      */
@@ -393,7 +393,7 @@ class Language
      * E.g. home.hello matches home for file and hello for line.
      *
      * @param string $line The dot notation file line
-     * @param array<int|string,mixed> $args The arguments to be used in the formatted text
+     * @param array<mixed> $args The arguments to be used in the formatted text
      * @param string|null $locale A custom locale or null to use the current
      *
      * @return string|null The rendered text or null if not found
@@ -426,7 +426,7 @@ class Language
      *
      * @param string $file The file
      * @param string $line The file line
-     * @param array<int|string,mixed> $args The arguments to be used in the formatted text
+     * @param array<mixed> $args The arguments to be used in the formatted text
      * @param string|null $locale A custom locale or null to use the current
      *
      * @return string The rendered text or file.line expression
@@ -505,7 +505,7 @@ class Language
 
     /**
      * @param string $text
-     * @param array<int|string,mixed> $args
+     * @param array<mixed> $args
      * @param string|null $locale
      *
      * @return string
@@ -556,7 +556,7 @@ class Language
     /**
      * Sets a list of directories where language files can be found.
      *
-     * @param array<int,string> $directories a list of valid directory paths
+     * @param array<string> $directories a list of valid directory paths
      *
      * @throws InvalidArgumentException if a directory path is inaccessible
      *
@@ -627,7 +627,7 @@ class Language
      * NOTE: the default locale always is supported. But the current can be exclude
      * if this function is called after {@see Language::setCurrentLocale()}.
      *
-     * @param array<int,string> $locales the supported locales
+     * @param array<string> $locales the supported locales
      *
      * @return static
      */
