@@ -34,7 +34,7 @@ class LanguageCollector extends Collector
             $activities[] = [
                 'collector' => $this->getName(),
                 'class' => static::class,
-                'description' => 'Render message ' . $index + 1,
+                'description' => 'Render message ' . ($index + 1),
                 'start' => $data['start'],
                 'end' => $data['end'],
             ];
