@@ -582,7 +582,84 @@ Challenge:
 Database Integration
 --------------------
 
-Coming!
+We will see how to fetch language messages in a database.
+
+In this example, we will use the `Database Library <https://gitlab.com/aplus-framework/libraries/database>`_
+and we will extend the Language class.
+
+First, we create the database schema called **app** and in it we will create the
+table **Language** and we will insert some lines for testing:
+
+.. code-block:: php
+
+    use Framework\Database\Database;
+    use Framework\Database\Definition\Table\TableDefinition;
+    
+    $database = new Database('root', 'password');
+    $database->createSchema('app')->run();
+    $database->use('app');
+
+    $database->createTable('Languages')->definition(function (TableDefinition $def) {
+        $def->column('locale')->varchar(5);
+        $def->column('file')->varchar(32);
+        $def->column('line')->varchar(64);
+        $def->column('message')->varchar(255);
+    })->run();
+
+    $database->insert('Languages')->values([
+        ['en', 'home', 'welcome', 'Welcome!'],
+        ['es', 'home', 'welcome', '¡Bienvenido!'],
+        ['pt-br', 'home', 'welcome', 'Bem-vindo!'],
+    ])->run();
+
+Once that's done, we'll extend the Language class, adding functionality to
+interact with the database:
+
+.. code-block:: php
+
+    use Framework\Language\Language;
+    
+    class DatabaseLanguage extends Language
+    {
+        protected Database $database;
+        protected string $databaseTable = 'Languages';
+    
+        public function setDatabase(Database $database) : static
+        {
+            $this->database = $database;
+            return $this;
+        }
+    
+        protected function findLines(string $locale, string $file) : static
+        {
+            parent::findLines($locale, $file);
+            if (isset($this->database)) {
+                $result = $this->database->select()
+                    ->from($this->databaseTable)
+                    ->whereEqual('locale', $locale)
+                    ->whereEqual('file', $file)
+                    ->run();
+                $lines = [];
+                while ($row = $result->fetch()) {
+                    $lines[$row->line] = $row->message;
+                }
+                $this->addLines($locale, $file, $lines);
+            }
+            return $this;
+        }
+    }
+
+So we can render the messages directly from the database:
+
+.. code-block:: php
+
+    $database = new Database('root', 'password');
+    $database->use('app');
+    
+    $language = new DatabaseLanguage();
+    $language->setDatabase($database);
+    
+    echo $language->render('home', 'welcome');
 
 Conclusion
 ----------
