@@ -577,7 +577,7 @@ Challenge:
 
 - Make requests with other languages.
 - Add the default locale file.
-- Implement an `LTR <https://en.wikipedia.org/wiki/Right-to-left_script>`_ page with HTML attributes and access it with a web browser.
+- Implement an `RTL <https://en.wikipedia.org/wiki/Right-to-left_script>`_ page with HTML attributes and access it with a web browser.
 
 Database Integration
 --------------------
