@@ -14,6 +14,8 @@ test:php:
     paths:
       - build/
       - vendor/
+  variables:
+    COMPOSER_ROOT_VERSION: dev-master
   before_script:
     - composer update
   script:
