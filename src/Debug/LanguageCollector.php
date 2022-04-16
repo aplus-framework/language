@@ -59,12 +59,7 @@ class LanguageCollector extends Collector
             ?></p>
         <p><strong>Fallback Level:</strong> <?php
             $level = $this->language->getFallbackLevel();
-        $levelName = match ($level) {
-            Language::FALLBACK_PARENT => 'parent',
-                Language::FALLBACK_DEFAULT => 'default',
-                default => 'none',
-        };
-        echo "{$level} ({$levelName})"; ?></p>
+        echo "{$level->value} ({$level->name})"; ?></p>
         <h1>Rendered Messages</h1>
         <?= $this->renderRenderedMessages() ?>
         <h1>Directories</h1>

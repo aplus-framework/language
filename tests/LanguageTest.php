@@ -9,6 +9,7 @@
  */
 namespace Tests\Language;
 
+use Framework\Language\FallbackLevel;
 use Framework\Language\Language;
 use PHPUnit\Framework\TestCase;
 
@@ -129,15 +130,9 @@ final class LanguageTest extends TestCase
 
     public function testFallbackLevel() : void
     {
-        self::assertSame($this->language::FALLBACK_DEFAULT, $this->language->getFallbackLevel());
-        $this->language->setFallbackLevel($this->language::FALLBACK_NONE);
-        self::assertSame($this->language::FALLBACK_NONE, $this->language->getFallbackLevel());
-    }
-
-    public function testInvalidFallbackLevel() : void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->language->setFallbackLevel(999);
+        self::assertSame(FallbackLevel::default, $this->language->getFallbackLevel());
+        $this->language->setFallbackLevel(FallbackLevel::none);
+        self::assertSame(FallbackLevel::none, $this->language->getFallbackLevel());
     }
 
     public function testLang() : void

@@ -10,6 +10,7 @@
 namespace Tests\Language\Debug;
 
 use Framework\Language\Debug\LanguageCollector;
+use Framework\Language\FallbackLevel;
 use Framework\Language\Language;
 use PHPUnit\Framework\TestCase;
 
@@ -47,12 +48,12 @@ final class LanguageCollectorTest extends TestCase
             '2 (default)',
             $this->collector->getContents()
         );
-        $language->setFallbackLevel(Language::FALLBACK_PARENT);
+        $language->setFallbackLevel(FallbackLevel::parent);
         self::assertStringContainsString(
             '1 (parent)',
             $this->collector->getContents()
         );
-        $language->setFallbackLevel(Language::FALLBACK_NONE);
+        $language->setFallbackLevel(FallbackLevel::none);
         self::assertStringContainsString(
             '0 (none)',
             $this->collector->getContents()

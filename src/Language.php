@@ -26,26 +26,6 @@ use JetBrains\PhpStorm\Pure;
 class Language
 {
     /**
-     * Fallback to default language.
-     *
-     * If the parent language is not found, try to use the default language.
-     */
-    public const FALLBACK_DEFAULT = 2;
-    /**
-     * Disable fallback.
-     *
-     * Use language lines only from the given language.
-     */
-    public const FALLBACK_NONE = 0;
-    /**
-     * Fallback to parent language.
-     *
-     * If the given language is pt-BR and a line is not found, try to use the line of pt.
-     *
-     * NOTE: The parent locale must be set in the Supported Locales to this fallback work.
-     */
-    public const FALLBACK_PARENT = 1;
-    /**
      * The current locale.
      */
     protected string $currentLocale;
@@ -62,7 +42,7 @@ class Language
     /**
      * The locale fallback level.
      */
-    protected int $fallbackLevel = Language::FALLBACK_DEFAULT;
+    protected FallbackLevel $fallbackLevel = FallbackLevel::default;
     /**
      * List with locales of already scanned directories.
      *
@@ -252,10 +232,10 @@ class Language
     /**
      * Gets the Fallback Level.
      *
-     * @return int One of the FALLBACK_* constants
+     * @return FallbackLevel
      */
     #[Pure]
-    public function getFallbackLevel() : int
+    public function getFallbackLevel() : FallbackLevel
     {
         return $this->fallbackLevel;
     }
@@ -273,15 +253,15 @@ class Language
     protected function getFallbackLine(string $locale, string $file, string $line) : array
     {
         $text = null;
-        $level = $this->getFallbackLevel();
+        $level = $this->getFallbackLevel()->value;
         // Fallback to parent
-        if ($level > static::FALLBACK_NONE && \strpos($locale, '-') > 1) {
+        if ($level > FallbackLevel::none->value && \strpos($locale, '-') > 1) {
             [$locale] = \explode('-', $locale, 2);
             $text = $this->getLine($locale, $file, $line);
         }
         // Fallback to default
         if ($text === null
-            && $level > static::FALLBACK_PARENT
+            && $level > FallbackLevel::parent->value
             && $locale !== $this->getDefaultLocale()
         ) {
             $locale = $this->getDefaultLocale();
@@ -604,19 +584,12 @@ class Language
     /**
      * Sets the Fallback Level.
      *
-     * @param int $level one of the FALLBACK_* constants
+     * @param FallbackLevel $level
      *
      * @return static
      */
-    public function setFallbackLevel(int $level) : static
+    public function setFallbackLevel(FallbackLevel $level) : static
     {
-        if ( ! \in_array($level, [
-            static::FALLBACK_NONE,
-            static::FALLBACK_PARENT,
-            static::FALLBACK_DEFAULT,
-        ], true)) {
-            throw new InvalidArgumentException('Invalid fallback level: ' . $level);
-        }
         $this->fallbackLevel = $level;
         return $this;
     }
