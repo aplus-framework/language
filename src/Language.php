@@ -134,6 +134,7 @@ class Language
      */
     public function currency(float $value, string $currency, string $locale = null) : string
     {
+        // @phpstan-ignore-next-line
         return \NumberFormatter::create(
             $locale ?? $this->getCurrentLocale(),
             \NumberFormatter::CURRENCY
@@ -157,7 +158,8 @@ class Language
             throw new InvalidArgumentException('Invalid date style format: ' . $style);
         }
         $style = $style ?: 'short';
-        return (string) \MessageFormatter::formatMessage(
+        // @phpstan-ignore-next-line
+        return \MessageFormatter::formatMessage(
             $locale ?? $this->getCurrentLocale(),
             "{time, date, {$style}}",
             ['time' => $time]
@@ -394,7 +396,8 @@ class Language
      */
     public function ordinal(int $number, string $locale = null) : string
     {
-        return (string) \MessageFormatter::formatMessage(
+        // @phpstan-ignore-next-line
+        return \MessageFormatter::formatMessage(
             $locale ?? $this->getCurrentLocale(),
             '{number, ordinal}',
             ['number' => $number]
