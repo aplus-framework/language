@@ -50,15 +50,15 @@ class LanguageCollector extends Collector
         \ob_start(); ?>
         <p><strong>Default Locale:</strong> <?=
             \htmlentities($this->language->getDefaultLocale())
-            ?></p>
+        ?></p>
         <p><strong>Current Locale:</strong> <?=
-            \htmlentities($this->language->getCurrentLocale())
-            ?></p>
+        \htmlentities($this->language->getCurrentLocale())
+        ?></p>
         <p><strong>Supported Locales:</strong> <?=
-            \htmlentities(\implode(', ', $this->language->getSupportedLocales()))
-            ?></p>
+        \htmlentities(\implode(', ', $this->language->getSupportedLocales()))
+        ?></p>
         <p><strong>Fallback Level:</strong> <?php
-            $level = $this->language->getFallbackLevel();
+        $level = $this->language->getFallbackLevel();
         echo "{$level->value} ({$level->name})"; ?></p>
         <h1>Rendered Messages</h1>
         <?= $this->renderRenderedMessages() ?>
@@ -146,7 +146,7 @@ class LanguageCollector extends Collector
         $count = \count($lines);
         \ob_start(); ?>
         <p>There <?= $count === 1 ? 'is 1 message line' : "are {$count} message lines"
-            ?> available to the current locale (<?= $this->language->getCurrentLocale() ?>).
+        ?> available to the current locale (<?= $this->language->getCurrentLocale() ?>).
         </p>
         <table>
             <thead>
