@@ -14,7 +14,7 @@ namespace Framework\Language;
  *
  * @package language
  */
-enum FallbackLevel: int
+enum FallbackLevel : int
 {
     /**
      * Disable fallback.
