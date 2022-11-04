@@ -460,7 +460,6 @@ class Language
         if ($text !== null) {
             $text = $this->formatMessage($text, $args, $locale);
         }
-        // @phpstan-ignore-next-line
         return [
             'locale' => $locale,
             'message' => $text ?? ($file . '.' . $line),
