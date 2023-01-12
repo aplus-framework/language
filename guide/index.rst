@@ -214,6 +214,8 @@ Fallback
 The fallback system allows rendering a non-existing line in the current locale
 with a line from the parent locale, the default locale, or none.
 
+The fallback levels are present in the enum **Framework\Language\FallbackLevel**.
+
 - `Fallback to None`_
 - `Fallback to Parent Locale`_
 - `Fallback to Default Locale`_
@@ -225,7 +227,7 @@ You can disable fallback with:
 
 .. code-block:: php
 
-    $language->setFallbackLevel(Language::FALLBACK_NONE);
+    $language->setFallbackLevel(FallbackLevel::none);
 
 This way, lines not found in the current locale will return a string. 
 For example: ``contact.thanks``.
@@ -237,7 +239,7 @@ Parent locales are, for example: ``en`` to ``en-us`` and ``pt`` to ``pt-br``.
 
 .. code-block:: php
 
-    $language->setFallbackLevel(Language::FALLBACK_PARENT);
+    $language->setFallbackLevel(FallbackLevel::parent);
 
 In the example below, only lines to the ``pt`` locale will be added,
 and calls to ``pt-br`` will work:
@@ -295,7 +297,7 @@ If the Fallback Level has been changed, you can set it like this:
 
 .. code-block:: php
 
-    $language->setFallbackLevel(Language::FALLBACK_DEFAULT);
+    $language->setFallbackLevel(FallbackLevel::default);
 
 File Language Directories
 -------------------------
