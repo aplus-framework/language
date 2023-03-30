@@ -68,7 +68,7 @@ They can be set as in this example:
         'es',
         'pt',
         'pt-br',
-    ]);
+    ]); // static
 
 And you can get them like this:
 
@@ -96,7 +96,7 @@ Let's see an example adding messages to the ``contact`` file, in the ``en`` and
         'message' => 'Mensagem',
         'send' => 'Enviar',
         'thanks' => 'Obrigado por nos contatar, {name}!',
-    ]);
+    ]); // static
 
 Rendering messages
 ------------------
@@ -177,7 +177,7 @@ In the example below, the default locale is still ``en``. But by calling the
 
 .. code-block:: php
 
-    $language->setCurrentLocale('pt-br');
+    $language->setCurrentLocale('pt-br'); // static
 
     echo $language->render('contact', 'name');
 
@@ -227,7 +227,7 @@ You can disable fallback with:
 
 .. code-block:: php
 
-    $language->setFallbackLevel(FallbackLevel::none);
+    $language->setFallbackLevel(FallbackLevel::none); // static
 
 This way, lines not found in the current locale will return a string. 
 For example: ``contact.thanks``.
@@ -239,7 +239,7 @@ Parent locales are, for example: ``en`` to ``en-us`` and ``pt`` to ``pt-br``.
 
 .. code-block:: php
 
-    $language->setFallbackLevel(FallbackLevel::parent);
+    $language->setFallbackLevel(FallbackLevel::parent); // static
 
 In the example below, only lines to the ``pt`` locale will be added,
 and calls to ``pt-br`` will work:
@@ -249,7 +249,7 @@ and calls to ``pt-br`` will work:
     $language->addLines('pt', 'words', [
         'beautifulDay' => 'Dia bonito.',
         'busName' => 'Nós chamamos "bus" de autocarro.',
-    ]);
+    ]); // static
 
     echo $language->render('beautifulDay', 'words', 'pt-br') . '<br>'; 
     echo $language->render('busName', 'words', 'pt-br') . '<br>'; 
@@ -272,7 +272,7 @@ You can add specific lines for child locales. Let's see:
 
     $language->addLines('pt-br', 'words', [
         'busName' => 'Nós chamamos "bus" de ônibus.',
-    ]);
+    ]); // static
 
     echo $language->render('beautifulDay', 'words', 'pt-br') . '<br>'; 
     echo $language->render('busName', 'words', 'pt-br') . '<br>'; 
@@ -297,7 +297,7 @@ If the Fallback Level has been changed, you can set it like this:
 
 .. code-block:: php
 
-    $language->setFallbackLevel(FallbackLevel::default);
+    $language->setFallbackLevel(FallbackLevel::default); // static
 
 File Language Directories
 -------------------------
@@ -309,7 +309,7 @@ To do this, add a base directory:
 .. code-block:: php
 
     $directory = __DIR__ . '/Languages';
-    $language->addDirectory($directory);
+    $language->addDirectory($directory); // static
 
 Inside the base directory there should be subdirectories with locale names and
 inside them there should be language files that return an array.
