@@ -23,9 +23,9 @@
     "homepage": "https://aplus-framework.com/packages/language",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/language/issues",
+        "issues": "https://github.com/aplus-framework/language/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/language",
+        "source": "https://github.com/aplus-framework/language",
         "docs": "https://docs.aplus-framework.com/guides/libraries/language/"
     },
     "funding": [
