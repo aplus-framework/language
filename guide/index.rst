@@ -381,7 +381,7 @@ Will show:
 
 .. code-block:: html
 
-    <html lang="ar" dir="ltr">
+    <html lang="ar" dir="rtl">
 
 Currencies, dates and ordinals
 ------------------------------
