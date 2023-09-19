@@ -44,7 +44,7 @@ class LanguageCollector extends Collector
 
     public function getContents() : string
     {
-        if ( ! isset($this->language)) {
+        if (!isset($this->language)) {
             return '<p>A Language instance has not been set on this collector.</p>';
         }
         \ob_start(); ?>
@@ -72,7 +72,7 @@ class LanguageCollector extends Collector
 
     protected function renderRenderedMessages() : string
     {
-        if ( ! $this->hasData()) {
+        if (!$this->hasData()) {
             return '<p>No message has been rendered.</p>';
         }
         $count = \count($this->getData());

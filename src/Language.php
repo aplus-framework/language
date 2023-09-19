@@ -110,7 +110,7 @@ class Language
      */
     public function addLines(string $locale, string $file, array $lines) : static
     {
-        if ( ! $this->isFindedLocale($locale)) {
+        if (!$this->isFindedLocale($locale)) {
             // Certify that all directories are scanned first
             // So, this method always have priority on replacements
             $this->getLine($locale, $file, '');
@@ -154,7 +154,7 @@ class Language
      */
     public function date(int $time, string $style = null, string $locale = null) : string
     {
-        if ($style && ! \in_array($style, ['short', 'medium', 'long', 'full'], true)) {
+        if ($style && !\in_array($style, ['short', 'medium', 'long', 'full'], true)) {
             throw new InvalidArgumentException('Invalid date style format: ' . $style);
         }
         $style = $style ?: 'short';
@@ -299,7 +299,7 @@ class Language
         if (isset($this->languages[$locale][$file][$line])) {
             return $this->languages[$locale][$file][$line];
         }
-        if ( ! \in_array($locale, $this->getSupportedLocales(), true)) {
+        if (!\in_array($locale, $this->getSupportedLocales(), true)) {
             return null;
         }
         $this->addFindedLocale($locale);
@@ -549,7 +549,7 @@ class Language
         $dirs = [];
         foreach ($directories as $directory) {
             $path = \realpath($directory);
-            if ( ! $path || ! \is_dir($path)) {
+            if (!$path || !\is_dir($path)) {
                 throw new InvalidArgumentException('Directory path inaccessible: ' . $directory);
             }
             $dirs[] = $path . \DIRECTORY_SEPARATOR;
