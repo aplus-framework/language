@@ -133,6 +133,13 @@ final class LanguageTest extends TestCase
         self::assertSame(FallbackLevel::default, $this->language->getFallbackLevel());
         $this->language->setFallbackLevel(FallbackLevel::none);
         self::assertSame(FallbackLevel::none, $this->language->getFallbackLevel());
+        $this->language->setFallbackLevel(1);
+        self::assertSame(FallbackLevel::parent, $this->language->getFallbackLevel());
+        $this->expectException(\ValueError::class);
+        $this->expectExceptionMessage(
+            '5 is not a valid backing value for enum Framework\Language\FallbackLevel'
+        );
+        $this->language->setFallbackLevel(5);
     }
 
     public function testLang() : void
