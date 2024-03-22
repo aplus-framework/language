@@ -586,12 +586,15 @@ class Language
     /**
      * Sets the Fallback Level.
      *
-     * @param FallbackLevel $level
+     * @param FallbackLevel|int $level
      *
      * @return static
      */
-    public function setFallbackLevel(FallbackLevel $level) : static
+    public function setFallbackLevel(FallbackLevel|int $level) : static
     {
+        if (\is_int($level)) {
+            $level = FallbackLevel::from($level);
+        }
         $this->fallbackLevel = $level;
         return $this;
     }
