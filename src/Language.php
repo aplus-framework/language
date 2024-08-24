@@ -132,7 +132,7 @@ class Language
      *
      * @return string
      */
-    public function currency(float $value, string $currency, string $locale = null) : string
+    public function currency(float $value, string $currency, ?string $locale = null) : string
     {
         // @phpstan-ignore-next-line
         return \NumberFormatter::create(
@@ -152,7 +152,7 @@ class Language
      *
      * @return string
      */
-    public function date(int $time, string $style = null, string $locale = null) : string
+    public function date(int $time, ?string $style = null, ?string $locale = null) : string
     {
         if ($style && !\in_array($style, ['short', 'medium', 'long', 'full'], true)) {
             throw new InvalidArgumentException('Invalid date style format: ' . $style);
@@ -380,7 +380,7 @@ class Language
      *
      * @return string|null The rendered text or null if not found
      */
-    public function lang(string $line, array $args = [], string $locale = null) : ?string
+    public function lang(string $line, array $args = [], ?string $locale = null) : ?string
     {
         [$file, $line] = \explode('.', $line, 2);
         return $this->render($file, $line, $args, $locale);
@@ -394,7 +394,7 @@ class Language
      *
      * @return string
      */
-    public function ordinal(int $number, string $locale = null) : string
+    public function ordinal(int $number, ?string $locale = null) : string
     {
         // @phpstan-ignore-next-line
         return \MessageFormatter::formatMessage(
@@ -418,7 +418,7 @@ class Language
         string $file,
         string $line,
         array $args = [],
-        string $locale = null
+        ?string $locale = null
     ) : string {
         if (isset($this->debugCollector)) {
             $start = \microtime(true);
@@ -450,7 +450,7 @@ class Language
         string $file,
         string $line,
         array $args = [],
-        string $locale = null
+        ?string $locale = null
     ) : array {
         $locale ??= $this->getCurrentLocale();
         $text = $this->getLine($locale, $file, $line);
@@ -475,7 +475,7 @@ class Language
      *
      * @return bool True if the line is found, otherwise false
      */
-    public function hasLine(string $file, string $line, string $locale = null) : bool
+    public function hasLine(string $file, string $line, ?string $locale = null) : bool
     {
         $locale ??= $this->getCurrentLocale();
         $text = $this->getLine($locale, $file, $line);
@@ -492,7 +492,7 @@ class Language
      *
      * @return string
      */
-    public function formatMessage(string $text, array $args = [], string $locale = null) : string
+    public function formatMessage(string $text, array $args = [], ?string $locale = null) : string
     {
         $args = \array_map(static function ($arg) : string {
             return (string) $arg;
@@ -590,7 +590,7 @@ class Language
      *
      * @return static
      */
-    public function setFallbackLevel(FallbackLevel|int $level) : static
+    public function setFallbackLevel(FallbackLevel | int $level) : static
     {
         if (\is_int($level)) {
             $level = FallbackLevel::from($level);
