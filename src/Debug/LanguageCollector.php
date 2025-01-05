@@ -10,6 +10,7 @@
 namespace Framework\Language\Debug;
 
 use Framework\Debug\Collector;
+use Framework\Debug\Debugger;
 use Framework\Language\Language;
 
 /**
@@ -86,7 +87,7 @@ class LanguageCollector extends Collector
                 <th>Line</th>
                 <th>Message</th>
                 <th>Locale</th>
-                <th title="Seconds">Time</th>
+                <th title="Milliseconds">Time</th>
             </tr>
             </thead>
             <tbody>
@@ -99,7 +100,7 @@ class LanguageCollector extends Collector
                         <pre><code class="language-html"><?= \htmlentities($data['message']) ?></code></pre>
                     </td>
                     <td><?= \htmlentities($data['locale']) ?></td>
-                    <td><?= \round($data['end'] - $data['start'], 6) ?></td>
+                    <td><?= Debugger::roundSecondsToMilliseconds($data['end'] - $data['start']) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
