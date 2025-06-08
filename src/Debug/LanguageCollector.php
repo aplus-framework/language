@@ -79,7 +79,7 @@ class LanguageCollector extends Collector
         $count = \count($this->getData());
         \ob_start(); ?>
         <p><?= $count ?> message<?= $count === 1 ? '' : 's' ?> has been rendered
-            in <?= $this->getStatementsTime() ?> ms:
+            in <?= $this->getMessagesRenderingTime() ?> ms:
         </p>
         <table>
             <thead>
@@ -111,7 +111,7 @@ class LanguageCollector extends Collector
         return \ob_get_clean(); // @phpstan-ignore-line
     }
 
-    protected function getStatementsTime() : float
+    protected function getMessagesRenderingTime() : float
     {
         $time = .0;
         foreach ($this->getData() as $data) {
