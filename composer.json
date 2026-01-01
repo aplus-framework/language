@@ -35,7 +35,7 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.5",
         "ext-intl": "*",
         "aplus/debug": "^4.3",
         "aplus/helpers": "^4.0"
