@@ -636,26 +636,9 @@ class Language
      *
      * @return string 'ltr' for Left-To-Right ot 'rtl' for Right-To-Left
      */
-    #[Pure]
     public static function getLocaleDirection(string $locale) : string
     {
-        $locale = \strtolower($locale);
-        $locale = \strtr($locale, ['_' => '-']);
-        if (\in_array($locale, [
-            'ar',
-            'arc',
-            'ckb',
-            'dv',
-            'fa',
-            'ha',
-            'he',
-            'khw',
-            'ks',
-            'ps',
-            'ur',
-            'uz-af',
-            'yi',
-        ], true)) {
+        if (\locale_is_right_to_left($locale)) {
             return 'rtl';
         }
         return 'ltr';
