@@ -11,9 +11,11 @@ namespace Framework\Language;
 
 use Framework\Helpers\Isolation;
 use Framework\Language\Debug\LanguageCollector;
+use IntlListFormatter;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
+use ValueError;
 
 /**
  * Class Language.
@@ -164,6 +166,43 @@ class Language
             "{time, date, {$style}}",
             ['time' => $time]
         );
+    }
+
+    /**
+     * Gets a formatted list in a given locale.
+     *
+     * @param array<string> $strings The list of strings
+     * @param int|string $type The {@see IntlListFormatter} type
+     * @param int|string $width The {@see IntlListFormatter} width
+     * @param string|null $locale A custom locale or null to use the current
+     *
+     * @throws InvalidArgumentException for invalid list type and width
+     * @throws ValueError for invalid locale
+     *
+     * @return string
+     */
+    public function list(
+        array $strings,
+        int | string $type = IntlListFormatter::TYPE_AND,
+        int | string $width = IntlListFormatter::WIDTH_WIDE,
+        ?string $locale = null
+    ) : string {
+        $type = match ($type) {
+            IntlListFormatter::TYPE_AND, 'and' => IntlListFormatter::TYPE_AND,
+            IntlListFormatter::TYPE_OR, 'or' => IntlListFormatter::TYPE_OR,
+            IntlListFormatter::TYPE_UNITS, 'units' => IntlListFormatter::TYPE_UNITS,
+            default => throw new InvalidArgumentException('Invalid list type: ' . $type),
+        };
+        $width = match ($width) {
+            IntlListFormatter::WIDTH_WIDE, 'wide' => IntlListFormatter::WIDTH_WIDE,
+            IntlListFormatter::WIDTH_SHORT, 'short' => IntlListFormatter::WIDTH_SHORT,
+            IntlListFormatter::WIDTH_NARROW, 'narrow' => IntlListFormatter::WIDTH_NARROW,
+            default => throw new InvalidArgumentException('Invalid list width: ' . $width),
+        };
+        $locale ??= $this->getCurrentLocale();
+        $formatter = new IntlListFormatter($locale, $type, $width);
+        // @phpstan-ignore-next-line
+        return $formatter->format($strings);
     }
 
     /**

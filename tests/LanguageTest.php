@@ -11,6 +11,7 @@ namespace Tests\Language;
 
 use Framework\Language\FallbackLevel;
 use Framework\Language\Language;
+use IntlListFormatter;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -87,6 +88,65 @@ final class LanguageTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->language->date(\time(), 'unknown');
+    }
+
+    public function testList() : void
+    {
+        $strings = ['a', 'b', 'c'];
+        $list = $this->language->list($strings);
+        self::assertSame('a, b, and c', $list);
+        $list = $this->language->list($strings, 'and');
+        self::assertSame('a, b, and c', $list);
+        $list = $this->language->list($strings, IntlListFormatter::TYPE_OR);
+        self::assertSame('a, b, or c', $list);
+        $list = $this->language->list($strings, 'or');
+        self::assertSame('a, b, or c', $list);
+        $list = $this->language->list($strings, IntlListFormatter::TYPE_UNITS);
+        self::assertSame('a, b, c', $list);
+        $list = $this->language->list($strings, 'units');
+        self::assertSame('a, b, c', $list);
+        $list = $this->language->list($strings, locale: 'en_US');
+        self::assertSame('a, b, and c', $list);
+        $list = $this->language->list($strings, width: 'wide', locale: 'en_US');
+        self::assertSame('a, b, and c', $list);
+        $list = $this->language->list($strings, width: IntlListFormatter::WIDTH_SHORT, locale: 'en_US');
+        self::assertSame('a, b, & c', $list);
+        $list = $this->language->list($strings, width: 'short', locale: 'en_US');
+        self::assertSame('a, b, & c', $list);
+        $list = $this->language->list($strings, width: IntlListFormatter::WIDTH_NARROW, locale: 'en_US');
+        self::assertSame('a, b, c', $list);
+        $list = $this->language->list($strings, width: 'narrow', locale: 'en_US');
+        self::assertSame('a, b, c', $list);
+        $list = $this->language->list($strings, locale: 'DE');
+        self::assertSame('a, b und c', $list);
+        $list = $this->language->list($strings, locale: 'pt-Br');
+        self::assertSame('a, b e c', $list);
+    }
+
+    public function testListWithInvalidLocale() : void
+    {
+        $strings = ['a', 'b', 'c'];
+        $this->expectException(\ValueError::class);
+        $this->expectExceptionMessage(
+            'IntlListFormatter::__construct(): Argument #1 ($locale) "foo" is invalid'
+        );
+        $this->language->list($strings, locale: 'foo');
+    }
+
+    public function testListWithInvalidType() : void
+    {
+        $strings = ['a', 'b', 'c'];
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid list type: foo');
+        $this->language->list($strings, type: 'foo');
+    }
+
+    public function testListWithInvalidWidth() : void
+    {
+        $strings = ['a', 'b', 'c'];
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid list width: foo');
+        $this->language->list($strings, width: 'foo');
     }
 
     public function testDirectories() : void

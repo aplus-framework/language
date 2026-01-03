@@ -567,3 +567,36 @@ expectedReturnValues(
     \Framework\Language\Language::getFallbackLevel(),
     argumentsSet('fallback_levels')
 );
+registerArgumentsSet(
+    'intl_types',
+    \IntlListFormatter::TYPE_AND,
+    \IntlListFormatter::TYPE_OR,
+    \IntlListFormatter::TYPE_UNITS,
+    'and',
+    'or',
+    'units',
+);
+expectedArguments(
+    \Framework\Language\Language::list(),
+    1,
+    argumentsSet('intl_types')
+);
+registerArgumentsSet(
+    'intl_widths',
+    \IntlListFormatter::WIDTH_WIDE,
+    \IntlListFormatter::WIDTH_SHORT,
+    \IntlListFormatter::WIDTH_NARROW,
+    'wide',
+    'short',
+    'narrow',
+);
+expectedArguments(
+    \Framework\Language\Language::list(),
+    2,
+    argumentsSet('intl_widths')
+);
+expectedArguments(
+    \Framework\Language\Language::list(),
+    3,
+    argumentsSet('locales')
+);
