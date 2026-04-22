@@ -338,7 +338,8 @@ final class LanguageTest extends TestCase
 
     public function testRenderWithStringableArgs() : void
     {
-        $stringable = new class() {
+        $stringable = new class()
+        {
             public function __toString() : string
             {
                 return 'Mary Jane';

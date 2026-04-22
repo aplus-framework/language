@@ -158,7 +158,8 @@ final class LanguageCollectorTest extends TestCase
 
     public function testFallbackName() : void
     {
-        $collector = new class() extends LanguageCollector {
+        $collector = new class() extends LanguageCollector
+        {
             public function getFallbackName(string $locale) : string
             {
                 return parent::getFallbackName($locale);
