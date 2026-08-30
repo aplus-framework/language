@@ -10,7 +10,7 @@
 namespace Framework\Language\Debug;
 
 use Framework\Debug\Collector;
-use Framework\Debug\Debugger;
+use Framework\Debug\Debugger as D;
 use Framework\Language\Language;
 
 /**
@@ -50,13 +50,13 @@ class LanguageCollector extends Collector
         }
         \ob_start(); ?>
         <p><strong>Default Locale:</strong> <?=
-            \htmlentities($this->language->getDefaultLocale())
+            D::esc($this->language->getDefaultLocale())
         ?></p>
         <p><strong>Current Locale:</strong> <?=
-        \htmlentities($this->language->getCurrentLocale())
+        D::esc($this->language->getCurrentLocale())
         ?></p>
         <p><strong>Supported Locales:</strong> <?=
-        \htmlentities(\implode(', ', $this->language->getSupportedLocales()))
+        D::esc(\implode(', ', $this->language->getSupportedLocales()))
         ?></p>
         <p><strong>Fallback Level:</strong> <?php
         $level = $this->language->getFallbackLevel();
@@ -96,13 +96,13 @@ class LanguageCollector extends Collector
             <?php foreach ($this->getData() as $index => $data): ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <td><?= \htmlentities($data['file']) ?></td>
-                    <td><?= \htmlentities($data['line']) ?></td>
+                    <td><?= D::esc($data['file']) ?></td>
+                    <td><?= D::esc($data['line']) ?></td>
                     <td>
-                        <pre><code class="language-html"><?= \htmlentities($data['message']) ?></code></pre>
+                        <pre><code class="language-html"><?= D::esc($data['message']) ?></code></pre>
                     </td>
-                    <td><?= \htmlentities($data['locale']) ?></td>
-                    <td><?= Debugger::roundSecondsToMilliseconds($data['end'] - $data['start']) ?></td>
+                    <td><?= D::esc($data['locale']) ?></td>
+                    <td><?= D::roundSecondsToMilliseconds($data['end'] - $data['start']) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -118,7 +118,7 @@ class LanguageCollector extends Collector
             $total = $data['end'] - $data['start'];
             $time += $total;
         }
-        return Debugger::roundSecondsToMilliseconds($time);
+        return D::roundSecondsToMilliseconds($time);
     }
 
     protected function renderDirectories() : string
@@ -141,7 +141,7 @@ class LanguageCollector extends Collector
             <?php foreach ($this->language->getDirectories() as $index => $directory): ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <td><?= \htmlentities($directory) ?></td>
+                    <td><?= D::esc($directory) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -176,13 +176,13 @@ class LanguageCollector extends Collector
             <?php foreach ($lines as $index => $line): ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <td><?= \htmlentities($line['file']) ?></td>
-                    <td><?= \htmlentities($line['line']) ?></td>
+                    <td><?= D::esc($line['file']) ?></td>
+                    <td><?= D::esc($line['line']) ?></td>
                     <td>
-                        <pre><code class="language-icu-message-format"><?= \htmlentities($line['message']) ?></code></pre>
+                        <pre><code class="language-icu-message-format"><?= D::esc($line['message']) ?></code></pre>
                     </td>
-                    <td><?= \htmlentities($line['locale']) ?></td>
-                    <td><?= \htmlentities($line['fallback']) ?></td>
+                    <td><?= D::esc($line['locale']) ?></td>
+                    <td><?= D::esc($line['fallback']) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
