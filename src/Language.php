@@ -13,7 +13,6 @@ use Framework\Helpers\Isolation;
 use Framework\Language\Debug\LanguageCollector;
 use IntlListFormatter;
 use InvalidArgumentException;
-use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 use ValueError;
 
@@ -288,9 +287,11 @@ class Language
      * @param string $file The file
      * @param string $line The line
      *
-     * @return array<int,string|null> Two numeric keys containg the used locale and text
+     * @return array{
+     *      0: string,
+     *      1: string|null,
+     * } Two numeric keys containing the used locale and text
      */
-    #[ArrayShape(['string', 'string|null'])]
     protected function getFallbackLine(string $locale, string $file, string $line) : array
     {
         $text = null;
@@ -482,9 +483,11 @@ class Language
      * @param array<mixed> $args
      * @param string|null $locale
      *
-     * @return array<string,string>
+     * @return array{
+     *      locale: string,
+     *      message: string,
+     * }
      */
-    #[ArrayShape(['locale' => 'string', 'message' => 'string'])]
     protected function getRenderedLine(
         string $file,
         string $line,
