@@ -61,6 +61,18 @@ final class LanguageTest extends TestCase
         self::assertSame('rtl', $this->language->getCurrentLocaleDirection());
     }
 
+    public function testIsCurrentLocaleRtl() : void
+    {
+        self::assertSame('en', $this->language->getCurrentLocale());
+        self::assertFalse($this->language->isCurrentLocaleRtl());
+        $this->language->setCurrentLocale('pt-br');
+        self::assertSame('pt-br', $this->language->getCurrentLocale());
+        self::assertFalse($this->language->isCurrentLocaleRtl());
+        $this->language->setCurrentLocale('uz_AF');
+        self::assertSame('uz_AF', $this->language->getCurrentLocale());
+        self::assertTrue($this->language->isCurrentLocaleRtl());
+    }
+
     public function testDate() : void
     {
         $time = 1534160671; // 2018-08-13 08:44:31

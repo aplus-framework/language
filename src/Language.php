@@ -244,6 +244,16 @@ class Language
     }
 
     /**
+     * Indicates whether the current locale is RTL.
+     *
+     * @return bool
+     */
+    public function isCurrentLocaleRtl() : bool
+    {
+        return $this->getCurrentLocaleDirection() === 'rtl';
+    }
+
+    /**
      * Gets the default locale.
      *
      * @return string
