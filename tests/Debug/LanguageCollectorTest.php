@@ -9,6 +9,7 @@
  */
 namespace Tests\Language\Debug;
 
+use Framework\Debug\Activity;
 use Framework\Language\Debug\LanguageCollector;
 use Framework\Language\FallbackLevel;
 use Framework\Language\Language;
@@ -179,15 +180,9 @@ final class LanguageCollectorTest extends TestCase
         $language = $this->makeLanguage();
         self::assertEmpty($this->collector->getActivities());
         $language->render('foo', 'bar');
-        self::assertSame(
-            [
-                'collector',
-                'class',
-                'description',
-                'start',
-                'end',
-            ],
-            \array_keys($this->collector->getActivities()[0]) // @phpstan-ignore-line
+        self::assertInstanceOf(
+            Activity::class,
+            $this->collector->getActivities()[0] // @phpstan-ignore-line
         );
     }
 }
