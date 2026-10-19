@@ -9,7 +9,7 @@
  */
 namespace Tests\Language\Debug;
 
-use Framework\Language\Debug\LanguageCollection;
+use Aplus\Language\Debug\LanguageCollection;
 use PHPUnit\Framework\TestCase;
 
 final class LanguageCollectionTest extends TestCase

@@ -7,12 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Language\Debug;
+namespace Aplus\Language\Debug;
 
+use Aplus\Language\Language;
 use Framework\Debug\Activity;
 use Framework\Debug\Collector;
 use Framework\Debug\Debugger as D;
-use Framework\Language\Language;
 
 /**
  * Class LanguageCollector.

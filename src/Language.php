@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Language;
+namespace Aplus\Language;
 
+use Aplus\Language\Debug\LanguageCollector;
 use Framework\Helpers\Isolation;
-use Framework\Language\Debug\LanguageCollector;
 use IntlListFormatter;
 use InvalidArgumentException;
 use ValueError;

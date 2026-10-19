@@ -9,8 +9,8 @@
  */
 namespace Tests\Language;
 
-use Framework\Language\FallbackLevel;
-use Framework\Language\Language;
+use Aplus\Language\FallbackLevel;
+use Aplus\Language\Language;
 use IntlListFormatter;
 use PHPUnit\Framework\TestCase;
 
@@ -209,7 +209,7 @@ final class LanguageTest extends TestCase
         self::assertSame(FallbackLevel::parent, $this->language->getFallbackLevel());
         $this->expectException(\ValueError::class);
         $this->expectExceptionMessage(
-            '5 is not a valid backing value for enum Framework\Language\FallbackLevel'
+            '5 is not a valid backing value for enum Aplus\Language\FallbackLevel'
         );
         $this->language->setFallbackLevel(5);
     }

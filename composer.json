@@ -53,7 +53,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Framework\\Language\\": "src/"
+            "Aplus\\Language\\": "src/"
         }
     },
     "autoload-dev": {
