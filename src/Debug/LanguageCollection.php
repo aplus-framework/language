@@ -9,7 +9,7 @@
  */
 namespace Aplus\Language\Debug;
 
-use Framework\Debug\Collection;
+use Aplus\Debug\Collection;
 
 /**
  * Class LanguageCollection.

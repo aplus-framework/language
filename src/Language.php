@@ -9,8 +9,8 @@
  */
 namespace Aplus\Language;
 
+use Aplus\Helpers\Isolation;
 use Aplus\Language\Debug\LanguageCollector;
-use Framework\Helpers\Isolation;
 use IntlListFormatter;
 use InvalidArgumentException;
 use ValueError;
@@ -400,7 +400,7 @@ class Language
      *
      * @param string $locale The locale
      *
-     * @see \Framework\Language\Language::getLine()
+     * @see \Aplus\Language\Language::getLine()
      *
      * @return bool
      */

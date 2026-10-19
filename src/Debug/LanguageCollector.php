@@ -9,10 +9,10 @@
  */
 namespace Aplus\Language\Debug;
 
+use Aplus\Debug\Activity;
+use Aplus\Debug\Collector;
+use Aplus\Debug\Debugger as D;
 use Aplus\Language\Language;
-use Framework\Debug\Activity;
-use Framework\Debug\Collector;
-use Framework\Debug\Debugger as D;
 
 /**
  * Class LanguageCollector.

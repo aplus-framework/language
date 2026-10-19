@@ -9,10 +9,10 @@
  */
 namespace Tests\Language\Debug;
 
+use Aplus\Debug\Activity;
 use Aplus\Language\Debug\LanguageCollector;
 use Aplus\Language\FallbackLevel;
 use Aplus\Language\Language;
-use Framework\Debug\Activity;
 use PHPUnit\Framework\TestCase;
 
 final class LanguageCollectorTest extends TestCase
