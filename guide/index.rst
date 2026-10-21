@@ -38,7 +38,7 @@ An object of the Language class can be instantiated like this:
 
 .. code-block:: php
 
-    use Framework\Language\Language;
+    use Aplus\Language\Language;
 
     $language = new Language();
 
@@ -214,7 +214,7 @@ Fallback
 The fallback system allows rendering a non-existing line in the current locale
 with a line from the parent locale, the default locale, or none.
 
-The fallback levels are present in the enum **Framework\Language\FallbackLevel**.
+The fallback levels are present in the enum **Aplus\Language\FallbackLevel**.
 
 - `Fallback to None`_
 - `Fallback to Parent Locale`_
@@ -524,8 +524,8 @@ Create the **public/index.php** file:
     
     require __DIR__ . '/../vendor/autoload.php';
 
-    use Framework\HTTP\Request;
-    use Framework\Language\Language;
+    use Aplus\Http\Request;
+    use Aplus\Language\Language;
 
     $request = new Request();
 
@@ -594,8 +594,8 @@ table **Language** and we will insert some lines for testing:
 
 .. code-block:: php
 
-    use Framework\Database\Database;
-    use Framework\Database\Definition\Table\TableDefinition;
+    use Aplus\Database\Database;
+    use Aplus\Database\Definition\Table\TableDefinition;
     
     $database = new Database('root', 'password');
     $database->createSchema('app')->run();
@@ -619,7 +619,7 @@ interact with the database:
 
 .. code-block:: php
 
-    use Framework\Language\Language;
+    use Aplus\Language\Language;
     
     class DatabaseLanguage extends Language
     {
