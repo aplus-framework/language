@@ -200,9 +200,9 @@ registerArgumentsSet(
 );
 registerArgumentsSet(
     'fallback_levels',
-    \Framework\Language\Language::FALLBACK_DEFAULT,
-    \Framework\Language\Language::FALLBACK_NONE,
-    \Framework\Language\Language::FALLBACK_PARENT,
+    \Aplus\Language\Language::FALLBACK_DEFAULT,
+    \Aplus\Language\Language::FALLBACK_NONE,
+    \Aplus\Language\Language::FALLBACK_PARENT,
 );
 registerArgumentsSet(
     'locales',
@@ -478,93 +478,93 @@ registerArgumentsSet(
     'rtl',
 );
 expectedArguments(
-    \Framework\Language\Language::currency(),
+    \Aplus\Language\Language::currency(),
     1,
     argumentsSet('currencies')
 );
 expectedArguments(
-    \Framework\Language\Language::date(),
+    \Aplus\Language\Language::date(),
     1,
     argumentsSet('date_styles')
 );
 expectedArguments(
-    \Framework\Language\Language::setFallbackLevel(),
+    \Aplus\Language\Language::setFallbackLevel(),
     0,
     argumentsSet('fallback_levels')
 );
 expectedArguments(
-    \Framework\Language\Language::__construct(),
+    \Aplus\Language\Language::__construct(),
     0,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::addLines(),
+    \Aplus\Language\Language::addLines(),
     0,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::currency(),
+    \Aplus\Language\Language::currency(),
     2,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::date(),
+    \Aplus\Language\Language::date(),
     2,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::formatMessage(),
+    \Aplus\Language\Language::formatMessage(),
     2,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::getLocaleDirection(),
+    \Aplus\Language\Language::getLocaleDirection(),
     0,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::lang(),
+    \Aplus\Language\Language::lang(),
     2,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::ordinal(),
+    \Aplus\Language\Language::ordinal(),
     1,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::render(),
+    \Aplus\Language\Language::render(),
     3,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::setCurrentLocale(),
+    \Aplus\Language\Language::setCurrentLocale(),
     0,
     argumentsSet('locales')
 );
 expectedArguments(
-    \Framework\Language\Language::setDefaultLocale(),
+    \Aplus\Language\Language::setDefaultLocale(),
     0,
     argumentsSet('locales')
 );
 expectedReturnValues(
-    \Framework\Language\Language::getCurrentLocale(),
+    \Aplus\Language\Language::getCurrentLocale(),
     argumentsSet('locales')
 );
 expectedReturnValues(
-    \Framework\Language\Language::getCurrentLocaleDirection(),
+    \Aplus\Language\Language::getCurrentLocaleDirection(),
     argumentsSet('locale_directions')
 );
 expectedReturnValues(
-    \Framework\Language\Language::getDefaultLocale(),
+    \Aplus\Language\Language::getDefaultLocale(),
     argumentsSet('locales')
 );
 expectedReturnValues(
-    \Framework\Language\Language::getLocaleDirection(),
+    \Aplus\Language\Language::getLocaleDirection(),
     argumentsSet('locale_directions')
 );
 expectedReturnValues(
-    \Framework\Language\Language::getFallbackLevel(),
+    \Aplus\Language\Language::getFallbackLevel(),
     argumentsSet('fallback_levels')
 );
 registerArgumentsSet(
@@ -577,7 +577,7 @@ registerArgumentsSet(
     'units',
 );
 expectedArguments(
-    \Framework\Language\Language::list(),
+    \Aplus\Language\Language::list(),
     1,
     argumentsSet('intl_types')
 );
@@ -591,12 +591,12 @@ registerArgumentsSet(
     'narrow',
 );
 expectedArguments(
-    \Framework\Language\Language::list(),
+    \Aplus\Language\Language::list(),
     2,
     argumentsSet('intl_widths')
 );
 expectedArguments(
-    \Framework\Language\Language::list(),
+    \Aplus\Language\Language::list(),
     3,
     argumentsSet('locales')
 );
